@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم | أتيليه التصميم الداخلي</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Marked JS for Markdown Rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+</head>
+<body>
+
+  <!-- Background Overlay Pattern -->
+  <div class="bg-overlay"></div>
+
+  <div id="dashboard-app">
+    
+    <!-- Header -->
+    <header class="dash-header">
+      <div class="brand">
+        <div class="brand-logo"><i class="fa-solid fa-compass-drafting"></i></div>
+        <div>أتيليه <span>التصميم</span> - لوحة التحكم للطلبات</div>
+      </div>
+      <div class="header-actions">
+        <a href="index.html" class="nav-btn-link"><i class="fa-solid fa-file-signature"></i> صفحة الاستبيان</a>
+        <button id="settingsBtn" class="secondary-btn"><i class="fa-solid fa-gears"></i> إعدادات API</button>
+      </div>
+    </header>
+
+    <div class="dash-layout">
+      
+      <!-- Right Sidebar (Submissions list & Stats) -->
+      <aside class="dash-sidebar">
+        
+        <!-- Stats Mini Panel -->
+        <div class="stats-container">
+          <div class="stat-card">
+            <span class="stat-value" id="statTotal">0</span>
+            <span class="stat-label">إجمالي الطلبات</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statAnalyzed">0</span>
+            <span class="stat-label">تم تحليلها</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statPending">0</span>
+            <span class="stat-label">بانتظار التحليل</span>
+          </div>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-wrapper">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="searchBar" class="search-input" placeholder="ابحث باسم العميل أو نوع العقار...">
+        </div>
+
+        <!-- Submissions List -->
+        <div class="submissions-list-header">طلبات العملاء الواردة</div>
+        <div class="submissions-list" id="submissionsList">
+          <div class="sidebar-loader">
+            <div class="mini-spinner"></div>
+            <span>جاري تحميل الطلبات...</span>
+          </div>
+          <!-- Submissions injected here dynamically -->
+        </div>
+
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="dash-main" id="dashMain">
+        
+        <!-- Empty State View -->
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon"><i class="fa-solid fa-couch"></i></div>
+          <h3>أهلاً بك في لوحة تحكّم أتيليه</h3>
+          <p>يرجى اختيار أحد طلبات العملاء من القائمة اليمنى لعرض كافة التفاصيل واستنباط التقرير الإرشادي والتصميم المدعوم بالذكاء الاصطناعي (Gemini AI).</p>
+        </div>
+
+        <!-- Submission Details Container -->
+        <div class="details-panel" id="detailsPanel" style="display: none;">
+          
+          <!-- Details Header with action buttons -->
+          <div class="details-header">
+            <div class="client-meta-title">
+              <h2 id="clientName">عميل غير معروف</h2>
+              <div class="meta-badges">
+                <span class="badge" id="clientPhoneBadge"><i class="fa-solid fa-phone"></i> -</span>
+                <span class="badge" id="submissionDateBadge"><i class="fa-solid fa-calendar-day"></i> -</span>
+                <span class="badge" id="unitTypeBadge"><i class="fa-solid fa-house"></i> -</span>
+              </div>
+            </div>
+            <div class="details-header-actions">
+              <button id="deleteBtn" class="danger-btn"><i class="fa-solid fa-trash-can"></i> حذف الطلب</button>
+              <button id="analyzeBtn" class="ai-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> تحليل بالذكاء الاصطناعي</button>
+            </div>
+          </div>
+
+          <!-- Tabs Navigation -->
+          <div class="tabs-nav">
+            <button class="tab-link active" data-tab="clientProfileTab"><i class="fa-solid fa-user-tie"></i> ملف العميل والعائلة</button>
+            <button class="tab-link" data-tab="roomPrefsTab"><i class="fa-solid fa-bed"></i> تفضيلات الغرف والمساحات</button>
+            <button class="tab-link" data-tab="aiReportTab" id="aiReportTabBtn"><i class="fa-solid fa-brain"></i> تقرير التحليل الذكي (Gemini)</button>
+          </div>
+
+          <!-- Tab 1: Client Profile & Project Details -->
+          <div class="tab-content active" id="clientProfileTab">
+            <div class="dashboard-grid">
+              
+              <!-- Client Personal Card -->
+              <div class="dash-card">
+                <div class="card-header"><i class="fa-solid fa-id-card"></i> البيانات الشخصية والمهنية</div>
+                <div class="card-body">
+                  <div class="detail-row"><strong>الاسم الكامل:</strong> <span id="valFullName">-</span></div>
+                  <div class="detail-row"><strong>رقم الجوال:</strong> <span id="valPhone">-</span></div>
+                  <div class="detail-row"><strong>البريد الإلكتروني:</strong> <span id="valEmail">-</span></div>
+                  <div class="detail-row"><strong>المسمى الوظيفي:</strong> <span id="valJobTitle">-</span></div>
+                  <div class="detail-row"><strong>العمر:</strong> <span id="valAge">-</span></div>
+                  <div class="detail-row"><strong>الجنسية:</strong> <span id="valNationality">-</span></div>
+                  <div class="detail-row"><strong>الحالة الاجتماعية:</strong> <span id="valMaritalStatus">-</span></div>
+                </div>
+              </div>
+
+              <!-- Family details card -->
+              <div class="dash-card">
+                <div class="card-header"><i class="fa-solid fa-people-roof"></i> أسلوب حياة العائلة والشركاء</div>
+                <div class="card-body">
+                  <div id="wifeSummaryBlock">
+                    <h4 class="card-sub-header">تفاصيل شريكة الحياة (الزوجة)</h4>
+                    <div class="detail-row"><strong>الاسم والعمر:</strong> <span id="valWifeNameAge">-</span></div>
+                    <div class="detail-row"><strong>هل تعمل؟ ووظيفتها:</strong> <span id="valWifeJob">-</span></div>
+                    <div class="detail-row"><strong>احتياج مكتب منزلي:</strong> <span id="valWifeOffice">-</span></div>
+                    <div class="detail-row"><strong>الألوان والتفضيلات:</strong> <span id="valWifePrefs">-</span></div>
+                  </div>
+                  <div id="childrenSummaryBlock" style="margin-top: 15px;">
+                    <h4 class="card-sub-header">الأطفال والاهتمامات</h4>
+                    <div class="detail-row"><strong>عدد الأطفال:</strong> <span id="valChildrenCount">-</span></div>
+                    <div id="childrenDetailsList" class="sub-list-container">
+                      <!-- Render children inline -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Project scope card -->
+              <div class="dash-card">
+                <div class="card-header"><i class="fa-solid fa-compass"></i> تفاصيل العقار والجدول الزمني</div>
+                <div class="card-body">
+                  <div class="detail-row"><strong>نوع الوحدة:</strong> <span id="valUnitType">-</span></div>
+                  <div class="detail-row"><strong>مساحة الوحدة:</strong> <span id="valApproxArea">-</span></div>
+                  <div class="detail-row"><strong>عنوان المشروع:</strong> <span id="valProjectAddress">-</span></div>
+                  <div class="detail-row"><strong>عدد أفراد الأسرة بالمنزل:</strong> <span id="valFamilyMembers">-</span></div>
+                  <div class="detail-row"><strong>كبار سن مقيمون؟:</strong> <span id="valHasElderly">-</span></div>
+                  <div class="detail-row"><strong>حيوانات أليفة مقيمة؟:</strong> <span id="valHasPets">-</span></div>
+                  <div class="detail-row"><strong>الجدول الزمني المطلوب:</strong> <span id="valTimeline">-</span></div>
+                  <div class="detail-row"><strong>تاريخ نهائي محدد:</strong> <span id="valDeadline">-</span></div>
+                </div>
+              </div>
+
+              <!-- Financial prioritization card -->
+              <div class="dash-card">
+                <div class="card-header"><i class="fa-solid fa-coins"></i> الميزانية وتوجهات نمط المعيشة</div>
+                <div class="card-body">
+                  <div class="detail-row"><strong>الميزانية المرصودة:</strong> <span id="valBudget" class="highlight-gold">-</span></div>
+                  <div class="detail-row"><strong>أولوية الميزانية:</strong> <span id="valBudgetPriority">-</span></div>
+                  <div class="detail-row"><strong>أجواء المنزل العامة:</strong> <span id="valAtmosphere">-</span></div>
+                  <div class="detail-row"><strong>دور المنزل الرئيسي:</strong> <span id="valHomeRole">-</span></div>
+                  <div class="detail-row"><strong>العمل من المنزل (WFH):</strong> <span id="valWfh">-</span></div>
+                  <div class="detail-row"><strong>معدل استقبال الضيوف:</strong> <span id="valGuests">-</span></div>
+                </div>
+              </div>
+
+              <!-- Style preferences card -->
+              <div class="dash-card" style="grid-column: span 2;">
+                <div class="card-header"><i class="fa-solid fa-palette"></i> النمط التصميمي والخامات والألوان المفضلة</div>
+                <div class="card-body">
+                  <div class="compact-grid">
+                    <div>
+                      <div class="detail-row"><strong>الطراز المعماري المفضل:</strong> <span id="valPreferredStyle" class="highlight-gold">-</span></div>
+                      <div class="detail-row"><strong>نوعية الفراغات المفضلة:</strong> <span id="valSpatialFeel">-</span></div>
+                      <div class="detail-row"><strong>توزيع المساحات:</strong> <span id="valSpaceStyle">-</span></div>
+                      <div class="detail-row"><strong>نوع الأثاث المفضل:</strong> <span id="valFurnitureType">-</span></div>
+                      <div class="detail-row"><strong>نوع الإضاءة المفضلة:</strong> <span id="valLighting">-</span></div>
+                    </div>
+                    <div>
+                      <div class="detail-row"><strong>الألوان المفضلة:</strong> <span id="valFavoriteColors" style="color: var(--success-color); font-weight: 600;">-</span></div>
+                      <div class="detail-row"><strong>الألوان المرفوضة تماماً:</strong> <span id="valDislikedColors" style="color: var(--error-color); font-weight: 600;">-</span></div>
+                      <div class="detail-row">
+                        <strong>الخامات المفضلة المحددة:</strong>
+                        <div id="valMaterialsTags" class="tags-container" style="margin-top: 5px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Final reflections and vibes -->
+              <div class="dash-card" style="grid-column: span 2;">
+                <div class="card-header"><i class="fa-solid fa-heart"></i> التطلعات الفنية والمشاعر المستهدفة</div>
+                <div class="card-body">
+                  <div class="compact-grid">
+                    <div>
+                      <div class="detail-row"><strong>شعور الضيف عند الدخول:</strong> <span id="valGuestFeel">-</span></div>
+                      <div class="detail-row"><strong>شعور العائلة داخل المنزل:</strong> <span id="valHomeFeel">-</span></div>
+                      <div class="detail-row"><strong>المنزل المثالي في ثلاث كلمات:</strong> <span id="valIdealHomeThreeWords" class="highlight-gold" style="font-size: 1.1rem;">-</span></div>
+                    </div>
+                    <div>
+                      <div class="detail-row"><strong>أشياء لا يرغب برؤيتها إطلاقاً:</strong> <span id="valDislikedDesignElements" style="color: var(--error-color);">-</span></div>
+                      <div class="detail-row"><strong>الأولوية الكبرى للتصميم:</strong> <span id="valPriority">-</span></div>
+                      <div class="detail-row"><strong>هل توجد صور مرجعية ملهمة؟:</strong> <span id="valHasReferenceImages">-</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Tab 2: Detailed Room Preferences -->
+          <div class="tab-content" id="roomPrefsTab">
+            <div class="rooms-container">
+              
+              <!-- Living Room -->
+              <div class="room-block">
+                <h3 class="room-title"><i class="fa-solid fa-couch"></i> صالة المعيشة الرئيسية (Living Room)</h3>
+                <div class="compact-grid" style="margin-top:10px;">
+                  <div class="detail-row"><strong>الاستخدام الأساسي:</strong> <span id="roomLivingUse">-</span></div>
+                  <div class="detail-row"><strong>السعة الاستيعابية:</strong> <span id="roomLivingCapacity">-</span></div>
+                  <div class="detail-row"><strong>نوع الجلسة المفضل:</strong> <span id="roomLivingSeatingType">-</span></div>
+                  <div class="detail-row"><strong>التلفزيون عنصر رئيسي؟:</strong> <span id="roomLivingTv">-</span></div>
+                </div>
+                <div class="detail-row" style="margin-top:10px;">
+                  <strong>متطلبات خاصة بالصالة:</strong>
+                  <p class="room-text-block" id="roomLivingExtra">-</p>
+                </div>
+              </div>
+
+              <!-- Reception & Dining -->
+              <div class="room-block">
+                <h3 class="room-title"><i class="fa-solid fa-utensils"></i> منطقة الاستقبال والصالون الرسمي والسفرة (Reception & Dining)</h3>
+                <div class="compact-grid" style="margin-top:10px;">
+                  <div class="detail-row"><strong>طابع صالون الاستقبال:</strong> <span id="roomReceptionStyle">-</span></div>
+                  <div class="detail-row"><strong>استخدام السفرة الرئيسي:</strong> <span id="roomDiningUse">-</span></div>
+                  <div class="detail-row"><strong>عدد كراسي طاولة الطعام:</strong> <span id="roomDiningChairs">-</span></div>
+                  <div class="detail-row"><strong>مكونات منطقة السفرة:</strong> <span id="roomDiningNeeds">-</span></div>
+                </div>
+              </div>
+
+              <!-- Kitchen -->
+              <div class="room-block">
+                <h3 class="room-title"><i class="fa-solid fa-kitchen-set"></i> المطبخ وتجهيزاته (Kitchen)</h3>
+                <div class="compact-grid" style="margin-top:10px;">
+                  <div class="detail-row"><strong>نوع المطبخ المختار:</strong> <span id="roomKitchenType">-</span></div>
+                  <div class="detail-row"><strong>معدل الطبخ والاستخدام:</strong> <span id="roomKitchenUsage">-</span></div>
+                </div>
+                <div class="detail-row" style="margin-top:10px;">
+                  <strong>العناصر والتجهيزات الرئيسية المطلوبة:</strong>
+                  <p class="room-text-block" id="roomKitchenNeeds">-</p>
+                </div>
+              </div>
+
+              <!-- Master Bedroom -->
+              <div class="room-block">
+                <h3 class="room-title"><i class="fa-solid fa-bed"></i> جناح النوم الرئيسي (Master Bedroom)</h3>
+                <div class="compact-grid" style="margin-top:10px;">
+                  <div class="detail-row"><strong>الطابع الجمالي والأجواء:</strong> <span id="roomMasterVibe">-</span></div>
+                  <div class="detail-row"><strong>توزيع الإضاءة المفضل:</strong> <span id="roomMasterLighting">-</span></div>
+                </div>
+                <div class="detail-row" style="margin-top:10px;">
+                  <strong>متطلبات إضافية في جناح الماستر:</strong>
+                  <p class="room-text-block" id="roomMasterNeeds">-</p>
+                </div>
+              </div>
+
+              <!-- Extra Spaces -->
+              <div class="room-block">
+                <h3 class="room-title"><i class="fa-solid fa-door-open"></i> المساحات الخدمية والترفيهية والملحقات</h3>
+                <div class="compact-grid" style="margin-top:10px;">
+                  <div class="detail-row"><strong>منطقة المدخل (Entrance):</strong> <span id="roomEntranceVal">-</span></div>
+                  <div class="detail-row"><strong>غرفة الغسيل (Laundry):</strong> <span id="roomLaundryVal">-</span></div>
+                  <div class="detail-row"><strong>المكتب المنزلي (Home Office):</strong> <span id="roomOfficeVal">-</span></div>
+                  <div class="detail-row"><strong>الجيم والترفيه (Gym/Cinema):</strong> <span id="roomEntertainmentVal">-</span></div>
+                </div>
+                <div class="detail-row" style="margin-top:10px;">
+                  <strong>التراس والرووف والمساحات الخارجية:</strong>
+                  <p class="room-text-block" id="roomTerraceVal">-</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Tab 3: Gemini AI Report -->
+          <div class="tab-content" id="aiReportTab">
+            
+            <!-- Analysis Placeholder (Not Generated Yet) -->
+            <div class="ai-empty-state" id="aiPlaceholder">
+              <div class="ai-sparkle-logo"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+              <h3>توليد تقرير التصميم الإرشادي والمودبورد</h3>
+              <p>لم يتم إجراء التحليل الذكي لبيانات هذا العميل بعد. يمكنك بنقرة واحدة إرسال كامل تفضيلاته إلى Gemini لإنشاء تقرير إبداعي مفصل حول لوحة الألوان والخامات المقترحة، وتخطيط الفراغات، وتوزيع الإضاءة، ودراسة جدوى الميزانية.</p>
+              <button id="aiPlaceholderAnalyzeBtn" class="ai-btn-large"><i class="fa-solid fa-brain"></i> ابدأ التحليل الفوري الآن</button>
+            </div>
+
+            <!-- Analysis Loading Screen -->
+            <div class="ai-loading-state" id="aiLoader" style="display: none;">
+              <div class="ai-spinner-wrapper">
+                <div class="ai-pulse-glow"></div>
+                <div class="ai-spinner"></div>
+              </div>
+              <h3 id="aiLoadingTitle">جاري تحليل تفضيلات العميل...</h3>
+              <p id="aiLoadingSubtitle">يرجى الانتظار، يتطلب الاتصال بمحرك Gemini حوالي 10 - 20 ثانية لتصميم تقرير هندسي إبداعي متكامل.</p>
+              
+              <!-- Animated Steps Tracker -->
+              <div class="ai-loading-steps">
+                <div class="loading-step active" id="stepData"><i class="fa-solid fa-check"></i> تجميع بيانات الاستبيان</div>
+                <div class="loading-step" id="stepPalette"><i class="fa-solid fa-circle-notch fa-spin"></i> استنباط الألوان والخامات الملائمة</div>
+                <div class="loading-step" id="stepSpace"><i class="fa-solid fa-circle-notch fa-spin"></i> التوجيه الهندسي وتوزيع الفراغات</div>
+                <div class="loading-step" id="stepReport"><i class="fa-solid fa-circle-notch fa-spin"></i> كتابة التقرير النهائي باللغة العربية</div>
+              </div>
+            </div>
+
+            <!-- Analysis Report Render Block -->
+            <div class="ai-report-wrapper" id="aiReportWrapper" style="display: none;">
+              
+              <div class="report-meta-header">
+                <div class="report-meta-info">
+                  <span class="report-badge"><i class="fa-solid fa-circle-check"></i> تقرير معتمد من الذكاء الاصطناعي</span>
+                  <span class="report-date" id="reportGeneratedAt">تاريخ التوليد: -</span>
+                </div>
+                <div class="report-header-actions">
+                  <button id="copyReportBtn" class="glass-btn"><i class="fa-solid fa-copy"></i> نسخ التقرير</button>
+                  <button id="regenerateBtn" class="glass-btn"><i class="fa-solid fa-arrows-rotate"></i> إعادة التوليد</button>
+                </div>
+              </div>
+
+              <!-- Styled Markdown Container -->
+              <article class="markdown-body" id="reportTextContainer">
+                <!-- Injected Markdown HTML -->
+              </article>
+              
+            </div>
+
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Settings Dialog Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-gears"></i> إعدادات Gemini API</h3>
+        <button class="close-btn" id="closeSettingsBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>لتوليد تقارير التصميم الداخلي، يتم إرسال طلبات التحليل إلى نموذج <strong>Gemini 2.5 Flash</strong>. يمكنك تحديد مفتاح الـ API الخاص بك هنا ليتم حفظه في متصفحك محلياً واستخدامه في جميع تحليلاتك.</p>
+        
+        <div class="form-group" style="margin-top: 20px;">
+          <label class="modal-label">مفتاح API Key لـ Gemini *</label>
+          <div class="input-wrapper-key">
+            <input type="password" id="geminiApiKeyInput" class="modal-input" placeholder="AIzaSy...">
+            <button id="toggleKeyVisibility" class="visibility-btn"><i class="fa-solid fa-eye"></i></button>
+          </div>
+          <span class="input-hint">يتم حفظ المفتاح محلياً في متصفحك ولا يتم تخزينه أبداً على خوادمنا بشكل دائم.</span>
+        </div>
+
+        <!-- Connection test warning -->
+        <div class="test-feedback" id="testKeyFeedback" style="display: none;"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="testApiKeyBtn" class="secondary-btn"><i class="fa-solid fa-vial"></i> اختبار المفتاح</button>
+        <button id="saveApiKeyBtn" class="primary-btn"><i class="fa-solid fa-floppy-disk"></i> حفظ الإعدادات</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
