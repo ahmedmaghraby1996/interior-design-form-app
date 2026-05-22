@@ -16,6 +16,47 @@
   <!-- Background Overlay Pattern -->
   <div class="bg-overlay"></div>
 
+  <!-- Login Gate -->
+  <div id="loginGate" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.92);">
+    <div style="background:var(--panel-bg,#1a1a1a);border:1px solid var(--border-color,#333);border-radius:12px;padding:40px 48px;width:100%;max-width:380px;text-align:center;">
+      <div style="font-size:2rem;color:#c5a880;margin-bottom:12px;"><i class="fa-solid fa-compass-drafting"></i></div>
+      <h2 style="color:#fff;font-size:1.3rem;margin-bottom:4px;">Mostafa Hussien Designs</h2>
+      <p style="color:#888;font-size:0.85rem;margin-bottom:28px;">لوحة التحكم — يرجى تسجيل الدخول</p>
+      <input id="loginUser" type="text" placeholder="اسم المستخدم" autocomplete="username"
+        style="width:100%;box-sizing:border-box;padding:10px 14px;margin-bottom:12px;border-radius:6px;border:1px solid #444;background:#111;color:#fff;font-size:1rem;outline:none;">
+      <input id="loginPass" type="password" placeholder="كلمة المرور" autocomplete="current-password"
+        style="width:100%;box-sizing:border-box;padding:10px 14px;margin-bottom:8px;border-radius:6px;border:1px solid #444;background:#111;color:#fff;font-size:1rem;outline:none;">
+      <p id="loginError" style="color:#e05;font-size:0.85rem;min-height:20px;margin-bottom:12px;"></p>
+      <button onclick="attemptLogin()"
+        style="width:100%;padding:11px;border-radius:6px;border:none;background:#c5a880;color:#000;font-size:1rem;font-weight:600;cursor:pointer;">
+        دخول
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      if (sessionStorage.getItem('dashAuth') === '1') {
+        document.getElementById('loginGate').style.display = 'none';
+      }
+    })();
+    function attemptLogin() {
+      const u = document.getElementById('loginUser').value.trim();
+      const p = document.getElementById('loginPass').value;
+      if (u === 'mostafa' && p === '1234') {
+        sessionStorage.setItem('dashAuth', '1');
+        document.getElementById('loginGate').style.display = 'none';
+      } else {
+        document.getElementById('loginError').innerText = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+      }
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && document.getElementById('loginGate').style.display !== 'none') {
+        attemptLogin();
+      }
+    });
+  </script>
+
   <div id="dashboard-app">
     
     <!-- Header -->
