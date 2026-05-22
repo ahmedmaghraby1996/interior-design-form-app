@@ -455,19 +455,132 @@ body {
 
 /* Responsive adjustment */
 @media (max-width: 768px) {
+  body {
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+    align-items: flex-start;
+    padding: 10px 0;
+  }
+  
+  #form-app {
+    height: auto;
+    min-height: calc(100vh - 20px);
+  }
+
+  .form-header {
+    padding: 15px 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .brand {
+    font-size: 1.1rem;
+  }
+  
+  .step-viewport {
+    align-items: flex-start;
+    padding: 10px 20px;
+    height: auto;
+    min-height: 400px;
+  }
+  
+  .step-card {
+    position: relative; /* Change from absolute to relative on mobile to allow natural height & flow */
+    padding: 0;
+    padding-bottom: 120px; /* Make space for fixed footer controls */
+    max-width: 100%;
+    transform: none; /* Disable transform animation on mobile to avoid overflow weirdness */
+    transition: opacity 0.3s ease;
+  }
+
+  .step-card.active {
+    display: flex;
+  }
+  
+  .welcome-logo {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+  
+  .welcome-title {
+    font-size: 1.8rem;
+    line-height: 1.4;
+  }
+  
+  .welcome-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+  }
+  
+  .question-text {
+    font-size: 1.4rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+  }
+
+  .question-description {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    margin-top: -5px;
+  }
+  
+  .text-input {
+    font-size: 1.2rem;
+    padding: 8px 0;
+  }
+
+  .choices-grid {
+    grid-template-columns: 1fr; /* Stack options vertically on smaller mobile screens */
+    gap: 10px;
+  }
+
+  .choice-btn {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
+  
+  .yes-no-wrapper {
+    gap: 10px;
+  }
+
+  .yes-no-btn {
+    padding: 15px;
+    font-size: 1rem;
+  }
+
   .compact-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
-  .step-card {
-    padding: 20px;
+  
+  .compact-input {
+    padding: 8px 12px;
+    font-size: 0.95rem;
   }
-  .question-text {
-    font-size: 1.5rem;
-  }
+
   .nav-controls {
-    bottom: 20px;
-    right: 20px;
-    left: 20px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    padding: 15px 20px;
     justify-content: space-between;
+    background: rgba(13, 13, 13, 0.95);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 0;
+  }
+  
+  .primary-btn, .secondary-btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+  
+  .keyboard-hint {
+    display: none;
   }
 }
