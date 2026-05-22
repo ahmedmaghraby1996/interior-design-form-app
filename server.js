@@ -94,6 +94,7 @@ app.post('/api/submit', (req, res) => {
       age: rawData['العمر'] || '-',
       nationality: rawData['الجنسية'] || '-',
       religion: rawData['الديانة'] || '-',
+      gender: rawData['الجنس'] || '-',
       maritalStatus: rawData['الحالة الاجتماعية'] || '-'
     },
     wifeInfo: rawData.wife || null,
@@ -175,7 +176,7 @@ Please analyze their answers and generate a comprehensive, premium design brief 
 Here is the client's information:
 - Client Name: ${submission.clientInfo.fullName}
 - Job Title: ${submission.clientInfo.jobTitle}
-- Age: ${submission.clientInfo.age} | Marital Status: ${submission.clientInfo.maritalStatus}
+- Age: ${submission.clientInfo.age} | Gender: ${submission.clientInfo.gender} | Marital Status: ${submission.clientInfo.maritalStatus}
 - Project Details: ${submission.projectInfo.unitType} (Approx: ${submission.projectInfo.approxArea}), Address: ${submission.projectInfo.address}
 - Household: ${submission.projectInfo.familyMembers} members. Elderly: ${submission.projectInfo.hasElderly}. Pets: ${submission.projectInfo.hasPets}
 - Budget: ${submission.projectInfo.budget} (${submission.projectInfo.budgetPriority}) | Timeline: ${submission.projectInfo.timeline}
@@ -192,8 +193,8 @@ Here is the client's information:
 - Desired guest impression: "${submission.finalThoughts.guestFeel}"
 - What they hate in design: "${submission.finalThoughts.dislikedDesignElements}"
 
-Wife Details:
-${submission.wifeInfo ? JSON.stringify(submission.wifeInfo) : 'No specific wife details submitted'}
+Life Partner Details (Wife/Husband):
+${submission.wifeInfo ? JSON.stringify(submission.wifeInfo) : 'No specific life partner details submitted'}
 
 Children Details:
 ${submission.childrenInfo && submission.childrenInfo.length > 0 ? JSON.stringify(submission.childrenInfo) : 'No children / kids details submitted'}
@@ -203,7 +204,7 @@ ${JSON.stringify(submission.rooms)}
 
 Please analyze these design inputs and write an elegant interior design report in Arabic with the following sections:
 1. **الملخص التنفيذي لشخصية العميل ونمط حياته (Client Persona & Lifestyle Summary)**
-   - Analyze how their daily routine, hobbies, and family composition will affect their home design. Highlight WFH needs, wife and kids requirements, and details about elderly/pets if applicable.
+   - Analyze how their daily routine, hobbies, and family composition will affect their home design. Highlight WFH needs, life partner (wife/husband) and kids requirements, and details about elderly/pets if applicable.
 2. **التوجه التصميمي الموصى به (Recommended Design Concept)**
    - Recommend a specific design concept inspired by their preferred style (${submission.preferences.preferredStyle}) and ideal home description. Explain how it reflects their lifestyle.
 3. **لوحة الألوان والخامات المقترحة (Suggested Color Palette & Materials Moodboard)**

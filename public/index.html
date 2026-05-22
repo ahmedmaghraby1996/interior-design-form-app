@@ -22,11 +22,16 @@
     <header class="form-header">
       <div class="brand">
         <div class="brand-logo"><i class="fa-solid fa-compass-drafting"></i></div>
-        <div>أتيليه <span>التصميم</span></div>
+        <div id="brandText">Mostafa Hussien <span>Designs</span></div>
       </div>
-      <a href="dashboard.html" style="color: var(--accent-color); text-decoration: none; font-size: 0.9rem;">
-        <i class="fa-solid fa-chart-line"></i> لوحة التحكم
-      </a>
+      <div style="display: flex; gap: 15px; align-items: center;">
+        <button id="langToggleBtn" class="secondary-btn" style="padding: 6px 12px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; cursor: pointer; border-radius: 4px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-primary); transition: var(--transition-fast);">
+          <i class="fa-solid fa-globe"></i> <span>English</span>
+        </button>
+        <a href="dashboard.html" id="dashboardLink" style="color: var(--accent-color); text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px;">
+          <i class="fa-solid fa-chart-line"></i> لوحة التحكم
+        </a>
+      </div>
     </header>
 
     <!-- Main Wizard Viewport -->
@@ -35,12 +40,22 @@
       <!-- STEP 0: Welcome Screen -->
       <section class="step-card active" data-step="0">
         <div class="welcome-screen">
-          <div class="welcome-logo">
-            <i class="fa-solid fa-couch"></i>
+          <div class="welcome-logo" style="margin-bottom: 25px;">
+            <img src="images/welcome.jpg" alt="أتيليه التصميم" style="max-width: 280px; width: 100%; height: auto;">
           </div>
-          <h1 class="welcome-title">استبيان التفضيلات السكنية والتصميم الداخلي</h1>
-          <p class="welcome-subtitle">مرحباً بك! نساعدك في تصميم مساحتك المثالية التي تلبي نمط حياتك. يستغرق هذا الاستبيان حوالي 10 دقائق لتزويد مصممينا بكافة المدخلات اللازمة لإنشاء لوحة تصميم فريدة لمنزلك.</p>
-          <button class="primary-btn next-btn">ابدأ الآن <i class="fa-solid fa-arrow-left"></i></button>
+          <div class="welcome-brand-en" style="font-family: var(--font-english); text-align: center; margin-bottom: 25px;">
+            <div style="font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-color); font-weight: 500;">Welcome</div>
+            <h1 style="font-size: 2.2rem; font-weight: 700; color: #fff; margin: 5px 0 10px 0; letter-spacing: 1px;">MOSTAFA HUSSIEN DESIGNS</h1>
+            <div style="font-size: 1.25rem; font-weight: 300; color: var(--text-secondary); letter-spacing: 0.5px;">Luxury Residential Design Brief</div>
+          </div>
+          
+          <div class="welcome-intro-ar" style="font-size: 1.1rem; line-height: 1.8; text-align: center; margin-bottom: 35px; color: var(--text-primary); max-width: 600px; margin-left: auto; margin-right: auto; display: flex; flex-direction: column; gap: 15px;">
+            <p>نود أن نشكركم على وقتكم.</p>
+            <p>تم إعداد هذا النموذج بعناية لمساعدتنا على فهم أسلوب حياتكم، تفضيلاتكم، واحتياجاتكم التصميمية، بهدف تصميم مساحة سكنية فاخرة تعكس شخصيتكم وتوفر أعلى مستويات الراحة والجمال والوظيفية.</p>
+            <p>كل إجابة تقدمونها تساعدنا على بناء تجربة تصميم مخصصة بالكامل لكم.</p>
+          </div>
+          
+          <button class="primary-btn next-btn" style="margin: 0 auto;">ابدأ رحلتك التصميمية <i class="fa-solid fa-arrow-left"></i></button>
         </div>
       </section>
 
@@ -76,15 +91,27 @@
           </div>
           <div class="compact-item">
             <label class="compact-label">الديانة</label>
-            <input type="text" class="compact-input" id="religion" placeholder="مثال: الإسلام" value="الإسلام">
+            <select class="compact-input" id="religion">
+              <option value="">اختر...</option>
+              <option value="الإسلام">الإسلام</option>
+              <option value="المسيحية">المسيحية</option>
+              <option value="اليهودية">اليهودية</option>
+            </select>
           </div>
           <div class="compact-item">
-            <label class="compact-label">الحالة الاجتماعية</label>
-            <select class="compact-input" id="maritalStatus">
-              <option value="-">اختر...</option>
+            <label class="compact-label">الجنس *</label>
+            <select class="compact-input" id="gender" required>
+              <option value="">اختر...</option>
+              <option value="ذكر">ذكر</option>
+              <option value="أنثى">أنثى</option>
+            </select>
+          </div>
+          <div class="compact-item">
+            <label class="compact-label">الحالة الاجتماعية *</label>
+            <select class="compact-input" id="maritalStatus" required>
+              <option value="">اختر...</option>
               <option value="أعزب / عزباء">أعزب / عزباء</option>
               <option value="متزوج / متزوجة">متزوج / متزوجة</option>
-              <option value="مطلق / مطلقة">مطلق / مطلقة</option>
               <option value="أرمل / أرملة">أرمل / أرملة</option>
             </select>
           </div>
@@ -97,12 +124,7 @@
         <h2 class="question-text">بيانات شريكة الحياة (الزوجة)</h2>
         <p class="question-description">هل ترغب في إضافة تفاصيل خاصة بأسلوب حياة الزوجة وتفضيلاتها التصميمية لملاءمتها في المنزل؟</p>
         
-        <div class="yes-no-wrapper" id="hasWifeWrapper">
-          <button class="yes-no-btn" data-value="نعم"><i class="fa-solid fa-check"></i> نعم</button>
-          <button class="yes-no-btn selected" data-value="لا"><i class="fa-solid fa-xmark"></i> لا</button>
-        </div>
-
-        <div id="wifeDetailsForm" style="display: none; margin-top: 30px;" class="compact-grid">
+        <div id="wifeDetailsForm" class="compact-grid" style="margin-top: 30px;">
           <div class="compact-item">
             <label class="compact-label">اسم الزوجة</label>
             <input type="text" class="compact-input" id="wifeName" placeholder="الاسم">
@@ -114,6 +136,7 @@
           <div class="compact-item">
             <label class="compact-label">هل تعمل الزوجة؟</label>
             <select class="compact-input" id="wifeWorks">
+              <option value="">اختر...</option>
               <option value="لا">لا تعمل</option>
               <option value="نعم">تعمل</option>
             </select>
@@ -125,6 +148,7 @@
           <div class="compact-item">
             <label class="compact-label">هل تحتاج مكتب خاص في المنزل؟</label>
             <select class="compact-input" id="wifeNeedsOffice">
+              <option value="">اختر...</option>
               <option value="لا">لا تحتاج</option>
               <option value="نعم - مستقل">نعم - مكتب مستقل</option>
               <option value="نعم - مدمج">نعم - ركن مدمج في غرفة النوم</option>
@@ -145,14 +169,20 @@
       <section class="step-card" data-step="3">
         <div class="question-number">03</div>
         <h2 class="question-text">بيانات الأطفال</h2>
-        <p class="question-description">كم عدد الأطفال لديك لتهيئة غرفهم ومساحاتهم؟</p>
-        
-        <div class="input-group">
-          <input type="number" class="text-input" id="childrenCount" min="0" max="6" value="0" placeholder="0">
+        <p class="question-description">هل لديك أطفال تريد تهيئة غرفهم ومساحاتهم؟</p>
+
+        <div class="yes-no-wrapper" id="hasChildrenWrapper">
+          <button class="yes-no-btn" data-value="نعم"><i class="fa-solid fa-check"></i> نعم</button>
+          <button class="yes-no-btn" data-value="لا"><i class="fa-solid fa-xmark"></i> لا</button>
         </div>
 
-        <div id="childrenContainer" style="margin-top: 20px; max-height: 250px; overflow-y: auto; padding-right: 5px;">
-          <!-- Child data forms will be injected here dynamically -->
+        <div id="childrenDetailsForm" style="display: none; margin-top: 30px;">
+          <div class="input-group">
+            <input type="number" class="text-input" id="childrenCount" min="1" max="6" placeholder="عدد الأطفال">
+          </div>
+          <div id="childrenContainer" style="margin-top: 20px; max-height: 250px; overflow-y: auto; padding-right: 5px;">
+            <!-- Child data forms will be injected here dynamically -->
+          </div>
         </div>
       </section>
 
@@ -167,9 +197,11 @@
             <select class="compact-input" id="unitType" required>
               <option value="">اختر...</option>
               <option value="شقة">شقة</option>
+              <option value="استوديو">استوديو</option>
               <option value="فيلا">فيلا</option>
               <option value="تاون هاوس">تاون هاوس</option>
-              <option value="مكتب">مكتب</option>
+              <option value="بنتهاوس">بنتهاوس</option>
+              <option value="دوبلكس">دوبلكس</option>
               <option value="أخرى">أخرى</option>
             </select>
           </div>
@@ -188,6 +220,7 @@
           <div class="compact-item">
             <label class="compact-label">هل يوجد كبار سن مقيمون؟</label>
             <select class="compact-input" id="hasElderly">
+              <option value="">اختر...</option>
               <option value="لا">لا</option>
               <option value="نعم">نعم</option>
             </select>
@@ -195,6 +228,7 @@
           <div class="compact-item">
             <label class="compact-label">هل يوجد حيوانات أليفة مقيمة بالمنزل؟</label>
             <select class="compact-input" id="hasPets">
+              <option value="">اختر...</option>
               <option value="لا">لا</option>
               <option value="نعم">نعم (قطط / كلاب / طيور)</option>
             </select>
@@ -211,8 +245,6 @@
           <div class="compact-item">
             <label class="compact-label">الميزانية التقديرية (جنيه مصري) *</label>
             <select class="compact-input" id="budget" required>
-              <option value="">اختر النطاق...</option>
-              <option value="أقل من 200 ألف جنيه">أقل من 200 ألف جنيه</option>
               <option value="200,000 - 500,000 جنيه">200,000 - 500,000 جنيه</option>
               <option value="500,000 - 1,000,000 جنيه">500,000 - 1,000,000 جنيه</option>
               <option value="1,000,000 - 2,500,000 جنيه">1,000,000 - 2,500,000 جنيه</option>
@@ -222,8 +254,9 @@
           <div class="compact-item">
             <label class="compact-label">أولوية الميزانية</label>
             <select class="compact-input" id="budgetPriority">
+              <option value="">اختر...</option>
               <option value="الاقتصاد والتكلفة">الاقتصاد وخفض التكاليف</option>
-              <option value="توازن القيمة والجودة" selected>توازن القيمة والجودة</option>
+              <option value="توازن القيمة والجودة">توازن القيمة والجودة</option>
               <option value="الفخامة والجودة العالية بغض النظر عن التكلفة">الجودة والفخامة المطلقة</option>
             </select>
           </div>
@@ -231,7 +264,7 @@
             <label class="compact-label">الجدول الزمني المفضل للتنفيذ</label>
             <select class="compact-input" id="timeline">
               <option value="عاجل (1-2 أشهر)">عاجل (1-2 أشهر)</option>
-              <option value="متوسط (3-6 أشهر)" selected>متوسط (3-6 أشهر)</option>
+              <option value="متوسط (3-6 أشهر)">متوسط (3-6 أشهر)</option>
               <option value="مرن (أكثر من 6 أشهر)">مرن (أكثر من 6 أشهر)</option>
             </select>
           </div>
@@ -250,6 +283,7 @@
           <div class="compact-item" style="grid-column: span 2;">
             <label class="compact-label">ما هو الدور الرئيسي للمنزل بالنسبة لك؟</label>
             <select class="compact-input" id="homeRole">
+              <option value="">اختر...</option>
               <option value="مكان للراحة والهدوء">مكان للراحة والهدوء والخصوصية</option>
               <option value="تجمعات عائلية وحيوية">تجمعات عائلية وأنشطة للأولاد</option>
               <option value="استقبال ضيوف ومناسبات باستمرار">استقبال ضيوف ومناسبات اجتماعية</option>
@@ -259,6 +293,7 @@
           <div class="compact-item">
             <label class="compact-label">هل تعمل من المنزل؟</label>
             <select class="compact-input" id="wfh">
+              <option value="">اختر...</option>
               <option value="لا">لا</option>
               <option value="نعم - عمل كامل">نعم - عمل كامل</option>
               <option value="نعم - عمل جزئي">نعم - عمل جزئي</option>
@@ -267,14 +302,16 @@
           <div class="compact-item">
             <label class="compact-label">معدل استقبال الضيوف</label>
             <select class="compact-input" id="guests">
+              <option value="">اختر...</option>
               <option value="نادرًا">نادرًا (مرة في الشهر أو أقل)</option>
-              <option value="أحيانًا" selected>أحيانًا (مرة في الأسبوع)</option>
+              <option value="أحيانًا">أحيانًا (مرة في الأسبوع)</option>
               <option value="دائمًا">دائمًا (أكثر من مرة في الأسبوع)</option>
             </select>
           </div>
           <div class="compact-item">
             <label class="compact-label">الأجواء العامة المفضلة</label>
             <select class="compact-input" id="atmosphere">
+              <option value="">اختر...</option>
               <option value="هادئة وساكنة">هادئة للغاية وساكنة</option>
               <option value="حيوية ومرحة">حيوية ومرحة</option>
               <option value="دافئة ومريحة">دافئة ومريحة (Cozy)</option>
@@ -283,6 +320,7 @@
           <div class="compact-item">
             <label class="compact-label">تفضيل توزيع المساحات</label>
             <select class="compact-input" id="spaceStyle">
+              <option value="">اختر...</option>
               <option value="مفتوحة بالكامل Open Concept">المساحات المفتوحة والشرحة</option>
               <option value="مغلقة لخصوصية أكثر Separated">مساحات مغلقة لمزيد من الخصوصية</option>
               <option value="مختلطة (شبه مفتوحة) Semi-open">مساحات مختلطة (فواصل بصرية مرنة)</option>
@@ -308,11 +346,13 @@
               <option value="Japandi (ياباني إسكندنافي)">Japandi (ياباني إسكندنافي)</option>
               <option value="Industrial (صناعي)">Industrial (صناعي)</option>
               <option value="Boho (بوهيمي طبيعي)">Boho (بوهيمي طبيعي)</option>
+              <option value="أخرى">أخرى</option>
             </select>
           </div>
           <div class="compact-item">
             <label class="compact-label">نوعية الفراغات المفضلة</label>
             <select class="compact-input" id="spatialFeel">
+              <option value="">اختر...</option>
               <option value="البسيطة والمريحة">البسيطة والعملية</option>
               <option value="الغنية بالتفاصيل والنقوش">الغنية بالتفاصيل والنقوش والمرايا</option>
               <option value="الفندقية والفاخرة">الفندقية والفاخرة (Luxury)</option>
@@ -321,14 +361,16 @@
           <div class="compact-item">
             <label class="compact-label">نوع الإضاءة المفضلة</label>
             <select class="compact-input" id="lighting">
-              <option value="دافئة Warm White (3000K)">دافئة جداً صفراء</option>
-              <option value="طبيعية Natural White (4000K)" selected>طبيعية نهارية (مختلطة)</option>
+              <option value="">اختر...</option>
+              <option value="دافئة Warm White (3000K)">دافئه</option>
+              <option value="طبيعية Natural White (4000K)">طبيعية نهارية (مختلطة)</option>
               <option value="بيضاء Cool White (6000K)">بيضاء ناصعة</option>
             </select>
           </div>
           <div class="compact-item">
             <label class="compact-label">نوع الأثاث المفضل</label>
             <select class="compact-input" id="furnitureType">
+              <option value="">اختر...</option>
               <option value="عملي ومريح">عملي ومريح (Comfortable)</option>
               <option value="فاخر وثقيل">فاخر كلاسيكي (Heavy Luxury)</option>
               <option value="مودرن وبسيط">مودرن وبسيط وعصري</option>
@@ -344,14 +386,16 @@
             <input type="text" class="compact-input" id="dislikedColors" placeholder="مثال: أحمر فاقع، أصفر">
           </div>
           <div class="compact-item" style="grid-column: span 2;">
-            <label class="compact-label">الخامات المفضلة (اختر ما يعجبك)</label>
+            <label class="compact-label" id="materialsLabel">الخامات المفضلة (اختر ما يعجبك)</label>
             <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 5px;" id="materialsContainer">
               <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="أخشاب طبيعية">أخشاب طبيعية</span>
               <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="رخام وبورسلان">رخام طبيعي</span>
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="بورسلين">بورسلين</span>
               <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="معادن (استيل / ذهبي / أسود)">معادن (استيل/ذهبي)</span>
               <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="زجاج ومرايا">زجاج ومرايا</span>
               <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="خرسانة مكشوفة وطوب">خرسانة وطين</span>
               <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="أقمشة ناعمة (مخمل / كتان)">أقمشة (كتان ومخمل)</span>
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="خامات بديله">خامات بديله</span>
             </div>
           </div>
         </div>
@@ -365,6 +409,7 @@
           <div class="compact-item">
             <label class="compact-label">الاستخدام الرئيسي للغرفة</label>
             <select class="compact-input" id="livingUse">
+              <option value="">اختر...</option>
               <option value="تجمع عائلي يومي">تجمع عائلي يومي</option>
               <option value="مشاهدة التلفاز والألعاب">مشاهدة التلفاز والسينما المنزلية</option>
               <option value="استقبال ضيوف مقربين">استقبال ضيوف مقربين</option>
@@ -373,8 +418,9 @@
           <div class="compact-item">
             <label class="compact-label">عدد الأشخاص المعتاد جلوسهم</label>
             <select class="compact-input" id="livingCapacity">
+              <option value="">اختر...</option>
               <option value="2-4">2 إلى 4 أشخاص</option>
-              <option value="4-6" selected>4 إلى 6 أشخاص</option>
+              <option value="4-6">4 إلى 6 أشخاص</option>
               <option value="6-8">6 إلى 8 أشخاص</option>
               <option value="أكثر من 8">أكثر من 8 أشخاص</option>
             </select>
@@ -382,14 +428,17 @@
           <div class="compact-item">
             <label class="compact-label">نوع الجلسة المفضلة</label>
             <select class="compact-input" id="livingSeatingType">
+              <option value="">اختر...</option>
               <option value="كنبة زاوية حرف L">كنبة زاوية مريحة (L-shape)</option>
               <option value="كنبات منفصلة مودرن">كنبات منفصلة عصرية</option>
               <option value="جلسة أرضية مطورة">جلسة أرضية مطورة مودرن</option>
+              <option value="كنبه سرير">كنبه سرير (Sofa Bed)</option>
             </select>
           </div>
           <div class="compact-item">
             <label class="compact-label">هل التلفزيون عنصر أساسي؟</label>
             <select class="compact-input" id="livingTv">
+              <option value="">اختر...</option>
               <option value="نعم">نعم، تلفاز رئيسي مع ساوند بار</option>
               <option value="لا">لا، الغرفة للحديث والاسترخاء فقط</option>
             </select>
@@ -409,6 +458,7 @@
           <div class="compact-item">
             <label class="compact-label">طابع مجلس الاستقبال (الريسبشن)</label>
             <select class="compact-input" id="receptionStyle">
+              <option value="">اختر...</option>
               <option value="رسمي وفاخر كلاسيك">رسمي وفاخر كلاسيكي</option>
               <option value="نيو كلاسيك أنيق">نيو كلاسيك أنيق وعصري</option>
               <option value="عصري وبسيط جداً">عصري وبسيط جداً (Minimal)</option>
@@ -417,16 +467,18 @@
           <div class="compact-item">
             <label class="compact-label">الاستخدام الغالب لمنطقة السفرة</label>
             <select class="compact-input" id="diningUse">
+              <option value="">اختر...</option>
               <option value="يومي للأسرة">تناول الوجبات اليومية للأسرة</option>
               <option value="للعزومات والمناسبات فقط">مخصص للعزومات والضيوف فقط</option>
-              <option value="مشترك يومي ومناسبات" selected>مشترك (يومي وللضيوف)</option>
+              <option value="مشترك يومي ومناسبات">مشترك (يومي وللضيوف)</option>
             </select>
           </div>
           <div class="compact-item">
             <label class="compact-label">عدد كراسي طاولة الطعام</label>
             <select class="compact-input" id="diningChairs">
+              <option value="">اختر...</option>
               <option value="4">4 كراسي</option>
-              <option value="6" selected>6 كراسي</option>
+              <option value="6">6 كراسي</option>
               <option value="8">8 كراسي</option>
               <option value="10+">10 كراسي أو أكثر</option>
             </select>
@@ -434,6 +486,7 @@
           <div class="compact-item">
             <label class="compact-label">متطلبات منطقة السفرة</label>
             <select class="compact-input" id="diningNeeds">
+              <option value="">اختر...</option>
               <option value="طاولة طعام وكراسي فقط">طاولة طعام وكراسي فقط</option>
               <option value="بوفيه معلق للتقديم">طاولة مع بوفيه (كونسول) للتقديم</option>
               <option value="إضاءة ثريا مميزة وتخزين">بوفيه مع وحدة تخزين زجاجية مدمجة</option>
@@ -450,6 +503,7 @@
           <div class="compact-item">
             <label class="compact-label">نوع المطبخ المفضل</label>
             <select class="compact-input" id="kitchenType">
+              <option value="">اختر...</option>
               <option value="مفتوح بالكامل (أمريكي)">مفتوح بالكامل على المعيشة (أمريكي)</option>
               <option value="مغلق بالكامل">مغلق بالكامل لعزل الروائح والخصوصية</option>
               <option value="شبه مفتوح (بزجاج أو فواصل)">شبه مفتوح (فواصل زجاجية منزلقة)</option>
@@ -458,6 +512,7 @@
           <div class="compact-item">
             <label class="compact-label">معدل الطبخ والتحضير</label>
             <select class="compact-input" id="kitchenUsage">
+              <option value="">اختر...</option>
               <option value="نشاط يومي ثقيل">طبخ يومي ثقيل ومستمر</option>
               <option value="نشاط متوسط">طبخ متوسط وأكلات خفيفة</option>
               <option value="خفيف جداً">اعتماد كبير على الوجبات السريعة والتسخين</option>
@@ -466,6 +521,22 @@
           <div class="compact-item" style="grid-column: span 2;">
             <label class="compact-label">أهم العناصر المطلوبة في المطبخ (يمكن اختيار أكثر من خيار)</label>
             <textarea class="compact-input" id="kitchenNeeds" rows="2" placeholder="مثال: جزيرة في الوسط (Kitchen Island)، مخزن أغذية (Pantry)، أجهزة مدمجة (Built-in)، ركن للقهوة"></textarea>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label" id="appliancesLabel">اختيارات الأجهزة (اختر ما يلزمك)</label>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 5px;" id="appliancesContainer">
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="ثلاجة">ثلاجة</span>
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="فريزر">فريزر</span>
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="بوتجاز عادى">بوتجاز عادى</span>
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="بوتجاز بيلت اين">بوتجاز بيلت اين</span>
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="فرن بيلت اين">فرن بيلت اين</span>
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="ميكرويف">ميكرويف</span>
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="فرن كهرباء">فرن كهرباء</span>
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="سخان">سخان</span>
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="غسالة ملابس">غسالة ملابس</span>
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="غسالة اطباق">غسالة اطباق</span>
+              <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="كوفي كورنور">كوفي كورنور</span>
+            </div>
           </div>
         </div>
       </section>
@@ -478,7 +549,8 @@
           <div class="compact-item">
             <label class="compact-label">الطابع الجمالي والجو العام</label>
             <select class="compact-input" id="masterVibe">
-              <option value="فندقي فاخر ومريح" selected>فندقي فاخر وهادئ</option>
+              <option value="">اختر...</option>
+              <option value="فندقي فاخر ومريح">فندقي فاخر وهادئ</option>
               <option value="بسيط وعملي جداً">بسيط وعملي جداً (Minimal)</option>
               <option value="دافئ ورومانسي بألوان داكنة">دافئ وحميمي بألوان دافئة</option>
             </select>
@@ -486,9 +558,18 @@
           <div class="compact-item">
             <label class="compact-label">تفضيل الإضاءة في غرفة النوم</label>
             <select class="compact-input" id="masterLighting">
+              <option value="">اختر...</option>
               <option value="خافتة وغير مباشرة للراحة">إضاءة خافتة غير مباشرة (مخفية)</option>
               <option value="متوسطة ومتنوعة">إضاءة متوسطة متنوعة (أباجورات وجبس)</option>
               <option value="قوية وواضحة">إضاءة قوية وساطعة</option>
+            </select>
+          </div>
+          <div class="compact-item">
+            <label class="compact-label">انواع التخزين</label>
+            <select class="compact-input" id="masterStorage">
+              <option value="">اختر...</option>
+              <option value="دولاب">دولاب</option>
+              <option value="دريسنج روم">دريسنج روم</option>
             </select>
           </div>
           <div class="compact-item" style="grid-column: span 2;">
@@ -507,6 +588,7 @@
           <div class="compact-item">
             <label class="compact-label">منطقة المدخل (Entrance)</label>
             <select class="compact-input" id="roomEntrance">
+              <option value="">اختر...</option>
               <option value="مفتوح على الصالة">مفتوح على الصالة</option>
               <option value="فاصل بصري مع كونسول ومرايا">بفاصل بصري مع كونسول وأحذية</option>
               <option value="مستقل ومفصول بالكامل">مستقل ومفصول بالكامل</option>
@@ -515,6 +597,7 @@
           <div class="compact-item">
             <label class="compact-label">غرفة الغسيل (Laundry Room)</label>
             <select class="compact-input" id="roomLaundry">
+              <option value="">اختر...</option>
               <option value="لا أحتاج مستقلة">لا أحتاج مستقلة (توضع بالحمامات)</option>
               <option value="أحتاج غرفة غسيل مستقلة">نعم، أحتاج غرفة غسيل وتخزين مستقلة</option>
             </select>
@@ -522,6 +605,7 @@
           <div class="compact-item">
             <label class="compact-label">المكتب المنزلي (Home Office)</label>
             <select class="compact-input" id="roomOffice">
+              <option value="">اختر...</option>
               <option value="لا أحتاج">لا أحتاج</option>
               <option value="أحتاج مكتب منزلي مستقل">نعم، أحتاج مكتب منزلي مستقل وعازل للصوت</option>
               <option value="ركن مكتب في غرفة أخرى">ركن مكتب صغير في غرفة المعيشة/النوم</option>
@@ -530,6 +614,7 @@
           <div class="compact-item">
             <label class="compact-label">الجيم والترفيه (Home Gym/Cinema)</label>
             <select class="compact-input" id="roomEntertainment">
+              <option value="">اختر...</option>
               <option value="لا أحتاج">لا أحتاج</option>
               <option value="أحتاج ركن رياضي صغير">ركن رياضي صغير (Gym) في المنزل</option>
               <option value="أحتاج صالة سينما منزلية مجهزة">صالة سينما منزلية مستقلة (Cinema)</option>
@@ -567,6 +652,7 @@
           <div class="compact-item">
             <label class="compact-label">ما هي الأولوية الكبرى بالنسبة لك؟</label>
             <select class="compact-input" id="priority">
+              <option value="">اختر...</option>
               <option value="الجمال والفخامة">الجمال والفخامة البصرية</option>
               <option value="العملية وتوزيع المساحة">العملية والراحة وتوزيع المساحة</option>
               <option value="سهولة الصيانة والتنظيف">سهولة الصيانة والتنظيف على المدى البعيد</option>
@@ -576,6 +662,7 @@
           <div class="compact-item">
             <label class="compact-label">هل لديك صور مرجعية أو Pinterest ملهمة؟</label>
             <select class="compact-input" id="hasReferenceImages">
+              <option value="">اختر...</option>
               <option value="لا">لا، اعتمد بالكامل على مصمميكم</option>
               <option value="نعم">نعم، لدي صور وسأشاركها معكم لاحقاً</option>
             </select>

@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let submissions = [];
   let selectedSubmissionId = null;
   let activeTab = 'clientProfileTab';
+  let currentDetailedSubmission = null;
 
   // DOM Elements
   const submissionsList = document.getElementById('submissionsList');
@@ -29,6 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const valAge = document.getElementById('valAge');
   const valNationality = document.getElementById('valNationality');
   const valMaritalStatus = document.getElementById('valMaritalStatus');
+  const valGender = document.getElementById('valGender');
+  const wifeSubHeader = document.getElementById('wifeSubHeader');
+  const lblWifeNameAge = document.getElementById('lblWifeNameAge');
+  const lblWifeJob = document.getElementById('lblWifeJob');
+  const lblWifeOffice = document.getElementById('lblWifeOffice');
+  const lblWifePrefs = document.getElementById('lblWifePrefs');
   const valWifeNameAge = document.getElementById('valWifeNameAge');
   const valWifeJob = document.getElementById('valWifeJob');
   const valWifeOffice = document.getElementById('valWifeOffice');
@@ -120,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const aiPlaceholderAnalyzeBtn = document.getElementById('aiPlaceholderAnalyzeBtn');
   const copyReportBtn = document.getElementById('copyReportBtn');
   const regenerateBtn = document.getElementById('regenerateBtn');
+  const downloadExcelBtn = document.getElementById('downloadExcelBtn');
 
   // Initialize
   loadAPIKey();
@@ -175,6 +183,13 @@ document.addEventListener('DOMContentLoaded', () => {
   analyzeBtn.addEventListener('click', startAnalysis);
   aiPlaceholderAnalyzeBtn.addEventListener('click', startAnalysis);
   regenerateBtn.addEventListener('click', startAnalysis);
+  downloadExcelBtn.addEventListener('click', () => {
+    if (currentDetailedSubmission) {
+      downloadSubmissionAsExcel(currentDetailedSubmission);
+    } else {
+      alert('يرجى اختيار طلب أولاً.');
+    }
+  });
 
   copyReportBtn.addEventListener('click', () => {
     const el = document.createElement('textarea');
@@ -277,6 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function selectSubmission(id) {
     selectedSubmissionId = id;
+    currentDetailedSubmission = null;
     
     // Highlight item in sidebar
     document.querySelectorAll('.sub-item-card').forEach(card => {
@@ -295,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch(`/api/submissions/${id}`);
       if (!res.ok) throw new Error('Could not load submission details');
       const data = await res.json();
+      currentDetailedSubmission = data;
       
       // Update local submission representation if catalog has changed
       const index = submissions.findIndex(s => s.id === id);
@@ -332,15 +349,39 @@ document.addEventListener('DOMContentLoaded', () => {
     valAge.textContent = sub.clientInfo.age || '-';
     valNationality.textContent = sub.clientInfo.nationality || '-';
     valMaritalStatus.textContent = sub.clientInfo.maritalStatus || '-';
+    valGender.textContent = sub.clientInfo.gender || '-';
 
-    // Wife Info block
+    // Wife/Husband Info block
     if (sub.wifeInfo) {
       wifeSummaryBlock.style.display = 'block';
-      const worksStr = sub.wifeInfo.works === 'نعم' ? `تعمل (${sub.wifeInfo.jobTitle || 'غير محدد'})` : 'لا تعمل';
-      valWifeNameAge.textContent = `${sub.wifeInfo.name || 'غير محدد'} (${sub.wifeInfo.age || '-'} سنة)`;
-      valWifeJob.textContent = worksStr;
-      valWifeOffice.textContent = sub.wifeInfo.needsOffice || 'لا تحتاج';
-      valWifePrefs.textContent = `الألوان: ${sub.wifeInfo.preferredColors || '-'} | نمط الحياة: ${sub.wifeInfo.lifestyle || '-'}`;
+      const isFemale = sub.clientInfo.gender === 'أنثى';
+      
+      // Update Labels and values dynamically based on gender
+      if (isFemale) {
+        wifeSubHeader.textContent = 'تفاصيل شريك الحياة (الزوج)';
+        lblWifeNameAge.textContent = 'الاسم والعمر (الزوج):';
+        lblWifeJob.textContent = 'هل يعمل؟ ووظيفته:';
+        lblWifeOffice.textContent = 'احتياج مكتب منزلي:';
+        lblWifePrefs.textContent = 'الألوان والتفضيلات:';
+        
+        const worksStr = sub.wifeInfo.works === 'نعم' ? `يعمل (${sub.wifeInfo.jobTitle || 'غير محدد'})` : 'لا يعمل';
+        valWifeNameAge.textContent = `${sub.wifeInfo.name || 'غير محدد'} (${sub.wifeInfo.age || '-'} سنة)`;
+        valWifeJob.textContent = worksStr;
+        valWifeOffice.textContent = sub.wifeInfo.needsOffice || 'لا يحتاج';
+        valWifePrefs.textContent = `الألوان: ${sub.wifeInfo.preferredColors || '-'} | نمط الحياة: ${sub.wifeInfo.lifestyle || '-'}`;
+      } else {
+        wifeSubHeader.textContent = 'تفاصيل شريكة الحياة (الزوجة)';
+        lblWifeNameAge.textContent = 'الاسم والعمر:';
+        lblWifeJob.textContent = 'هل تعمل؟ ووظيفتها:';
+        lblWifeOffice.textContent = 'احتياج مكتب منزلي:';
+        lblWifePrefs.textContent = 'الألوان والتفضيلات:';
+        
+        const worksStr = sub.wifeInfo.works === 'نعم' ? `تعمل (${sub.wifeInfo.jobTitle || 'غير محدد'})` : 'لا تعمل';
+        valWifeNameAge.textContent = `${sub.wifeInfo.name || 'غير محدد'} (${sub.wifeInfo.age || '-'} سنة)`;
+        valWifeJob.textContent = worksStr;
+        valWifeOffice.textContent = sub.wifeInfo.needsOffice || 'لا تحتاج';
+        valWifePrefs.textContent = `الألوان: ${sub.wifeInfo.preferredColors || '-'} | نمط الحياة: ${sub.wifeInfo.lifestyle || '-'}`;
+      }
     } else {
       wifeSummaryBlock.style.display = 'none';
     }
@@ -726,5 +767,154 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
       return isoString;
     }
+  }
+
+  function downloadSubmissionAsExcel(sub) {
+    if (!sub) return;
+
+    const dataRows = [];
+    
+    // Headers
+    dataRows.push(["القسم", "الحقل", "القيمة"]);
+
+    // 1. Client Personal Info
+    const ci = sub.clientInfo || {};
+    dataRows.push(["البيانات الشخصية", "الاسم الكامل", ci.fullName || "-"]);
+    dataRows.push(["البيانات الشخصية", "رقم الجوال", ci.phone || "-"]);
+    dataRows.push(["البيانات الشخصية", "البريد الإلكتروني", ci.email || "-"]);
+    dataRows.push(["البيانات الشخصية", "المسمى الوظيفي", ci.jobTitle || "-"]);
+    dataRows.push(["البيانات الشخصية", "العمر", ci.age || "-"]);
+    dataRows.push(["البيانات الشخصية", "الجنسية", ci.nationality || "-"]);
+    dataRows.push(["البيانات الشخصية", "الحالة الاجتماعية", ci.maritalStatus || "-"]);
+    dataRows.push(["البيانات الشخصية", "الجنس", ci.gender || "-"]);
+
+    // 2. Partner Info
+    if (sub.wifeInfo) {
+      const wi = sub.wifeInfo;
+      const isFemale = ci.gender === 'أنثى';
+      const sectionName = isFemale ? "بيانات الزوج" : "بيانات الزوجة";
+      const worksStr = isFemale
+        ? (wi.works === 'نعم' ? `يعمل (${wi.jobTitle || 'غير محدد'})` : 'لا يعمل')
+        : (wi.works === 'نعم' ? `تعمل (${wi.jobTitle || 'غير محدد'})` : 'لا تعمل');
+      
+      dataRows.push([sectionName, "الاسم والعمر", `${wi.name || 'غير محدد'} (${wi.age || '-'} سنة)`]);
+      dataRows.push([sectionName, "الحالة الوظيفية", worksStr]);
+      dataRows.push([sectionName, "احتياج مكتب منزلي", wi.needsOffice || "-"]);
+      dataRows.push([sectionName, "الألوان وتفضيلات المعيشة", `الألوان: ${wi.preferredColors || '-'} | نمط الحياة: ${wi.lifestyle || '-'}`]);
+    }
+
+    // 3. Children Info
+    if (sub.childrenInfo && sub.childrenInfo.length > 0) {
+      dataRows.push(["بيانات الأطفال", "عدد الأطفال", sub.childrenInfo.length]);
+      sub.childrenInfo.forEach((child, idx) => {
+        dataRows.push([
+          `بيانات الأطفال - الطفل ${idx + 1}`,
+          child.name || "غير معروف",
+          `${child.gender || "-"}، العمر: ${child.age || "-"} سنة، هوايات: ${child.hobbies || "-"}، متطلبات خاصة: ${child.needs || "-"}`
+        ]);
+      });
+    } else {
+      dataRows.push(["بيانات الأطفال", "عدد الأطفال", "لا يوجد"]);
+    }
+
+    // 4. Project & Timeline
+    const pi = sub.projectInfo || {};
+    dataRows.push(["تفاصيل العقار", "نوع الوحدة", pi.unitType || "-"]);
+    dataRows.push(["تفاصيل العقار", "مساحة الوحدة", pi.approxArea || "-"]);
+    dataRows.push(["تفاصيل العقار", "عنوان المشروع", pi.address || "-"]);
+    dataRows.push(["تفاصيل العقار", "عدد أفراد الأسرة بالمنزل", pi.familyMembers || "-"]);
+    dataRows.push(["تفاصيل العقار", "هل يوجد كبار سن؟", pi.hasElderly || "-"]);
+    dataRows.push(["تفاصيل العقار", "هل يوجد حيوانات أليفة؟", pi.hasPets || "-"]);
+    dataRows.push(["تفاصيل العقار", "الجدول الزمني المطلوب", pi.timeline || "-"]);
+    dataRows.push(["تفاصيل العقار", "تاريخ نهائي محدد (Deadline)", pi.deadline || "-"]);
+
+    // 5. Budget & Lifestyle
+    dataRows.push(["الميزانية وأسلوب الحياة", "الميزانية المرصودة", pi.budget || "-"]);
+    dataRows.push(["الميزانية وأسلوب الحياة", "أولوية الميزانية", pi.budgetPriority || "-"]);
+    
+    const pref = sub.preferences || {};
+    dataRows.push(["الميزانية وأسلوب الحياة", "أجواء المنزل العامة", pref.atmosphere || "-"]);
+    dataRows.push(["الميزانية وأسلوب الحياة", "دور المنزل الرئيسي", pref.homeRole || "-"]);
+    dataRows.push(["الميزانية وأسلوب الحياة", "العمل من المنزل", pref.wfh || "-"]);
+    dataRows.push(["الميزانية وأسلوب الحياة", "معدل استقبال الضيوف", pref.guests || "-"]);
+
+    // 6. Style & Design Preferences
+    dataRows.push(["التصميم والنمط", "الطراز المفضل", pref.preferredStyle || "-"]);
+    dataRows.push(["التصميم والنمط", "نوعية الفراغات المفضلة", pref.spatialFeel || "-"]);
+    dataRows.push(["التصميم والنمط", "توزيع المساحات", pref.spaceStyle || "-"]);
+    dataRows.push(["التصميم والنمط", "نوع الأثاث المفضل", pref.furnitureType || "-"]);
+    dataRows.push(["التصميم والنمط", "نوع الإضاءة المفضلة", pref.lighting || "-"]);
+    dataRows.push(["التصميم والنمط", "الألوان المفضلة", pref.favoriteColors || "-"]);
+    dataRows.push(["التصميم والنمط", "الألوان المرفوضة", pref.dislikedColors || "-"]);
+    dataRows.push(["التصميم والنمط", "الخامات المفضلة", Array.isArray(pref.materials) ? pref.materials.join(', ') : "-"]);
+
+    // 7. Final Thoughts
+    const ft = sub.finalThoughts || {};
+    dataRows.push(["التطلعات والمشاعر", "شعور الضيف عند الدخول", ft.guestFeel || "-"]);
+    dataRows.push(["التطلعات والمشاعر", "شعور العائلة داخل المنزل", ft.homeFeel || "-"]);
+    dataRows.push(["التطلعات والمشاعر", "المنزل المثالي في ثلاث كلمات", ft.idealHomeThreeWords || "-"]);
+    dataRows.push(["التطلعات والمشاعر", "أشياء لا يرغب برؤيتها", ft.dislikedDesignElements || "-"]);
+    dataRows.push(["التطلعات والمشاعر", "الأولوية الكبرى للتصميم", ft.priority || "-"]);
+    dataRows.push(["التطلعات والمشاعر", "صور مرجعية ملهمة", ft.hasReferenceImages || "-"]);
+
+    // 8. Rooms Detailed Preferences
+    const rooms = sub.rooms || {};
+    
+    // Living
+    const liv = rooms.livingRoom || {};
+    dataRows.push(["تفضيلات الغرف - المعيشة", "الاستخدام الأساسي", liv.usage || "-"]);
+    dataRows.push(["تفضيلات الغرف - المعيشة", "السعة الاستيعابية", liv.capacity || "-"]);
+    dataRows.push(["تفضيلات الغرف - المعيشة", "نوع الجلسة المفضل", liv.seatingType || "-"]);
+    dataRows.push(["تفضيلات الغرف - المعيشة", "التلفزيون عنصر رئيسي؟", liv.tvEssential || "-"]);
+    dataRows.push(["تفضيلات الغرف - المعيشة", "متطلبات خاصة بالصالة", liv.extraRequirements || "-"]);
+
+    // Reception
+    const rec = rooms.reception || {};
+    dataRows.push(["تفضيلات الغرف - الاستقبال", "طابع صالون الاستقبال", rec.style || "-"]);
+    dataRows.push(["تفضيلات الغرف - الاستقبال", "استخدام السفرة الرئيسي", rec.diningUse || "-"]);
+    dataRows.push(["تفضيلات الغرف - الاستقبال", "عدد كراسي طاولة الطعام", rec.diningChairs || "-"]);
+    dataRows.push(["تفضيلات الغرف - الاستقبال", "مكونات منطقة السفرة", rec.diningNeeds || "-"]);
+
+    // Kitchen
+    const kit = rooms.kitchen || {};
+    dataRows.push(["تفضيلات الغرف - المطبخ", "نوع المطبخ المختار", kit.type || "-"]);
+    dataRows.push(["تفضيلات الغرف - المطبخ", "معدل الطبخ والاستخدام", kit.usage || "-"]);
+    dataRows.push(["تفضيلات الغرف - المطبخ", "التجهيزات المطلوبة", kit.needs || "-"]);
+
+    // Master Bedroom
+    const mas = rooms.masterBedroom || {};
+    dataRows.push(["تفضيلات الغرف - النوم الرئيسية", "الطابع الجمالي والأجواء", mas.vibe || "-"]);
+    dataRows.push(["تفضيلات الغرف - النوم الرئيسية", "توزيع الإضاءة المفضل", mas.lighting || "-"]);
+    dataRows.push(["تفضيلات الغرف - النوم الرئيسية", "متطلبات إضافية", mas.needs || "-"]);
+
+    // Service & Extras
+    const ext = rooms.extraRooms || {};
+    dataRows.push(["تفضيلات الغرف - ملحقات", "منطقة المدخل", ext.entrance || "-"]);
+    dataRows.push(["تفضيلات الغرف - ملحقات", "غرفة الغسيل", ext.laundry || "-"]);
+    dataRows.push(["تفضيلات الغرف - ملحقات", "المكتب المنزلي", ext.office || "-"]);
+    dataRows.push(["تفضيلات الغرف - ملحقات", "الجيم والترفيه", ext.entertainment || "-"]);
+    dataRows.push(["تفضيلات الغرف - ملحقات", "التراس والرووف", ext.terrace || "-"]);
+
+    // Create sheet
+    const ws = XLSX.utils.aoa_to_sheet(dataRows);
+    
+    // Set sheet direction to RTL
+    if (!ws['!views']) ws['!views'] = [];
+    ws['!views'].push({ RTL: true });
+
+    // Column Widths Auto-fit
+    const colWidths = [
+      { wch: 25 }, // Section
+      { wch: 35 }, // Field
+      { wch: 60 }  // Value
+    ];
+    ws['!cols'] = colWidths;
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "تفاصيل الطلب");
+
+    // Output filename: customer's full name (fallback to 'طلب_تصميم')
+    const clientFullName = ci.fullName ? ci.fullName.trim().replace(/[/\\?%*:|"<>]/g, '_') : 'طلب_تصميم';
+    XLSX.writeFile(wb, `${clientFullName}.xlsx`);
   }
 });
