@@ -20,7 +20,11 @@ let db = null;
 async function getDb() {
   if (db) return db;
   if (!MONGODB_URI) throw new Error('MONGODB_URI environment variable is not set.');
-  const client = new MongoClient(MONGODB_URI);
+  const client = new MongoClient(MONGODB_URI, {
+    tls: true,
+    serverSelectionTimeoutMS: 10000,
+    connectTimeoutMS: 10000,
+  });
   await client.connect();
   db = client.db('interior_design');
   return db;

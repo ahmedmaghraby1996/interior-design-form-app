@@ -929,6 +929,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // Skip step 3 if not married
+    if (stepIndex === 3) {
+      const maritalStatusVal = document.getElementById('maritalStatus').value;
+      if (maritalStatusVal !== 'متزوج / متزوجة') {
+        if (currentStep < 3) {
+          showStep(4);
+        } else {
+          showStep(2);
+        }
+        return;
+      }
+    }
+
     // Remove active state from current card
     const currentCard = cards[currentStep];
     currentCard.classList.remove('active');
@@ -1096,19 +1109,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. Children Info
-    const childrenCount = parseInt(childrenCountInput.value) || 0;
     payload.children = [];
-    if (childrenCount > 0) {
-      const childBlocks = childrenContainer.querySelectorAll('.child-form-block');
-      childBlocks.forEach(block => {
-        payload.children.push({
-          name: block.querySelector('.child-name').value,
-          gender: block.querySelector('.child-gender').value,
-          age: block.querySelector('.child-age').value,
-          hobbies: block.querySelector('.child-hobbies').value,
-          needs: block.querySelector('.child-needs').value
+    if (maritalStatusVal === 'متزوج / متزوجة') {
+      const childrenCount = parseInt(childrenCountInput.value) || 0;
+      if (childrenCount > 0) {
+        const childBlocks = childrenContainer.querySelectorAll('.child-form-block');
+        childBlocks.forEach(block => {
+          payload.children.push({
+            name: block.querySelector('.child-name').value,
+            gender: block.querySelector('.child-gender').value,
+            age: block.querySelector('.child-age').value,
+            hobbies: block.querySelector('.child-hobbies').value,
+            needs: block.querySelector('.child-needs').value
+          });
         });
-      });
+      }
     }
 
     // 4. Project info
