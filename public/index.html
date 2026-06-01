@@ -22,7 +22,7 @@
     <header class="form-header">
       <div class="brand">
         <div class="brand-logo"><i class="fa-solid fa-compass-drafting"></i></div>
-        <div id="brandText">Mostafa Hussien <span>Designs</span></div>
+        <div id="brandText">مصطفى حسين <span>ديزاينز</span></div>
       </div>
       <div style="display: flex; gap: 15px; align-items: center;">
         <button id="langToggleBtn" class="secondary-btn" style="padding: 6px 12px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; cursor: pointer; border-radius: 4px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-primary); transition: var(--transition-fast);">
@@ -36,7 +36,7 @@
 
     <!-- Main Wizard Viewport -->
     <main class="step-viewport" id="viewport">
-      
+
       <!-- STEP 0: Welcome Screen -->
       <section class="step-card active" data-step="0">
         <div class="welcome-screen">
@@ -45,16 +45,14 @@
           </div>
           <div class="welcome-brand-en" style="font-family: var(--font-english); text-align: center; margin-bottom: 25px;">
             <div style="font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-color); font-weight: 500;">Welcome</div>
-            <h1 style="font-size: 2.2rem; font-weight: 700; color: #fff; margin: 5px 0 10px 0; letter-spacing: 1px;">MOSTAFA HUSSIEN DESIGNS</h1>
+            <h1 style="font-size: 2.2rem; font-weight: 700; color: #fff; margin: 5px 0 10px 0; letter-spacing: 1px;">مصطفى حسين ديزاينز</h1>
             <div style="font-size: 1.25rem; font-weight: 300; color: var(--text-secondary); letter-spacing: 0.5px;">Luxury Residential Design Brief</div>
           </div>
-          
           <div class="welcome-intro-ar" style="font-size: 1.1rem; line-height: 1.8; text-align: center; margin-bottom: 35px; color: var(--text-primary); max-width: 600px; margin-left: auto; margin-right: auto; display: flex; flex-direction: column; gap: 15px;">
             <p>نود أن نشكركم على وقتكم.</p>
             <p>تم إعداد هذا النموذج بعناية لمساعدتنا على فهم أسلوب حياتكم، تفضيلاتكم، واحتياجاتكم التصميمية، بهدف تصميم مساحة سكنية فاخرة تعكس شخصيتكم وتوفر أعلى مستويات الراحة والجمال والوظيفية.</p>
             <p>كل إجابة تقدمونها تساعدنا على بناء تجربة تصميم مخصصة بالكامل لكم.</p>
           </div>
-          
           <button class="primary-btn next-btn" style="margin: 0 auto;">ابدأ رحلتك التصميمية <i class="fa-solid fa-arrow-left"></i></button>
         </div>
       </section>
@@ -90,15 +88,6 @@
             <input type="text" class="compact-input" id="nationality" placeholder="مثال: مصري">
           </div>
           <div class="compact-item">
-            <label class="compact-label">الديانة</label>
-            <select class="compact-input" id="religion">
-              <option value="">اختر...</option>
-              <option value="الإسلام">الإسلام</option>
-              <option value="المسيحية">المسيحية</option>
-              <option value="اليهودية">اليهودية</option>
-            </select>
-          </div>
-          <div class="compact-item">
             <label class="compact-label">الجنس *</label>
             <select class="compact-input" id="gender" required>
               <option value="">اختر...</option>
@@ -123,7 +112,6 @@
         <div class="question-number">02</div>
         <h2 class="question-text">بيانات شريكة الحياة (الزوجة)</h2>
         <p class="question-description">هل ترغب في إضافة تفاصيل خاصة بأسلوب حياة الزوجة وتفضيلاتها التصميمية لملاءمتها في المنزل؟</p>
-        
         <div id="wifeDetailsForm" class="compact-grid" style="margin-top: 30px;">
           <div class="compact-item">
             <label class="compact-label">اسم الزوجة</label>
@@ -170,18 +158,16 @@
         <div class="question-number">03</div>
         <h2 class="question-text">بيانات الأطفال</h2>
         <p class="question-description">هل لديك أطفال تريد تهيئة غرفهم ومساحاتهم؟</p>
-
         <div class="yes-no-wrapper" id="hasChildrenWrapper">
           <button class="yes-no-btn" data-value="نعم"><i class="fa-solid fa-check"></i> نعم</button>
           <button class="yes-no-btn" data-value="لا"><i class="fa-solid fa-xmark"></i> لا</button>
         </div>
-
         <div id="childrenDetailsForm" style="display: none; margin-top: 30px;">
           <div class="input-group">
             <input type="number" class="text-input" id="childrenCount" min="1" max="6" placeholder="عدد الأطفال">
           </div>
-          <div id="childrenContainer" style="margin-top: 20px; max-height: 250px; overflow-y: auto; padding-right: 5px;">
-            <!-- Child data forms will be injected here dynamically -->
+          <div id="childrenContainer" style="margin-top: 20px; max-height: 400px; overflow-y: auto; padding-right: 5px;">
+            <!-- Child data forms injected here dynamically -->
           </div>
         </div>
       </section>
@@ -272,6 +258,37 @@
             <label class="compact-label">تاريخ نهائي محدد (إن وجد)</label>
             <input type="date" class="compact-input" id="deadline">
           </div>
+          <!-- NEW questions -->
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">كيف تنظر لتجهيز منزلك؟</label>
+            <select class="compact-input" id="investmentHorizon">
+              <option value="">اختر...</option>
+              <option value="استثمار طويل الأمد">استثمار طويل الأمد - أريد خامات تدوم عشرين سنة أو أكثر</option>
+              <option value="قرار جمالي حالي">قرار جمالي حالي - قد أجدد بعد خمس إلى عشر سنوات</option>
+              <option value="أريد مرونة التغيير بتكلفة معقولة">أريد مرونة التغيير بتكلفة معقولة - أفضل الحلول القابلة للتحديث</option>
+              <option value="لا أفكر في ذلك">لا أفكر في ذلك - أريد ما يناسبني الآن فقط</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">إذا وجدت أن الميزانية لا تكفي للتنفيذ الكامل دفعة واحدة، ماذا تفضل؟</label>
+            <select class="compact-input" id="budgetPhasing">
+              <option value="">اختر...</option>
+              <option value="أنفذ الأهم أولاً في مراحل">أنفذ الأهم أولاً وأترك الباقي في مراحل لاحقة</option>
+              <option value="أخفض مستوى الخامات للتنفيذ الكامل">أخفض مستوى الخامات في كل الغرف لتنفيذ الكامل دفعة واحدة</option>
+              <option value="أرفع الميزانية إذا لزم">أرفع الميزانية إذا لزم - لا أقبل حلولاً وسطى</option>
+              <option value="أقلص عدد الغرف المنفذة">أقلص عدد الغرف المنفذة وأنجز المبنى بمستوى عالٍ</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">هل يمكنك في المواد المصرية عالية الجودة مقارنةً بالمستوردة؟</label>
+            <select class="compact-input" id="localVsImported">
+              <option value="">اختر...</option>
+              <option value="أفضل المستورد حتى لو ارتفعت الميزانية">أفضل المستورد حتى لو ارتفعت الميزانية - الجودة والاسم أول</option>
+              <option value="أقبل المحلي بشرط المستوى البصري">أقبل المحلي بشرط أن يكون بمستوى بصري ومساوٍ للمستورد</option>
+              <option value="أفضل المحلي وأدعمه">أفضل المحلي - أثق في الصناعة المصرية وأدعم المنتج المحلي</option>
+              <option value="لا يهمني المصدر">لا يهمني المصدر - يهمني الجودة الفعلية والنتيجة النهائية فقط</option>
+            </select>
+          </div>
         </div>
       </section>
 
@@ -315,6 +332,7 @@
               <option value="هادئة وساكنة">هادئة للغاية وساكنة</option>
               <option value="حيوية ومرحة">حيوية ومرحة</option>
               <option value="دافئة ومريحة">دافئة ومريحة (Cozy)</option>
+              <option value="متنوعة - كل غرفة لها جوها المختلف">متنوعة - كل غرفة لها جوها المختلف</option>
             </select>
           </div>
           <div class="compact-item">
@@ -326,12 +344,188 @@
               <option value="مختلطة (شبه مفتوحة) Semi-open">مساحات مختلطة (فواصل بصرية مرنة)</option>
             </select>
           </div>
+          <!-- NEW questions -->
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">كيف تتعامل مع النظام والترتيب في حياتك اليومية؟</label>
+            <select class="compact-input" id="orgAndOrder">
+              <option value="">اختر...</option>
+              <option value="أحتاج من كل شيء في مكانه">أحتاج من كل شيء في مكانه - الفوضى تربكني نفسياً ولا تريحني</option>
+              <option value="أحب التنظيم ولكن لا أتوتر من بعض الفوضى">أحب التنظيم ولكن لا أتوتر من بعض الفوضى العرضية</option>
+              <option value="الفوضى الإبداعية مريحة">الفوضى الإبداعية مريحة - البيوت المرتبة جداً تبدو باردة لي</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما الذي يمنحك الطاقة عند عودتك للمنزل؟</label>
+            <select class="compact-input" id="homeEnergySource">
+              <option value="">اختر...</option>
+              <option value="الهدوء التام والإضاءة الخافتة">الهدوء التام والإضاءة الخافتة</option>
+              <option value="نشاط الأسرة وأصوات المنزل الحلوة">نشاط الأسرة وأصوات المنزل الحلوة</option>
+              <option value="تغيير الجو - موسيقى وروائح وإضاءة متنوعة">تغيير الجو - موسيقى، روائح، إضاءة متنوعة</option>
+              <option value="الطعام - العودة للمطبخ أو طاولة الأكل">الطعام - العودة للمطبخ أو طاولة الأكل</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">اختبار التعارض في القيم - إذا اضطررت للاختيار بين أحد هذين الخيارين، ماذا تختار؟</label>
+            <select class="compact-input" id="valueConflict">
+              <option value="">اختر...</option>
+              <option value="جمال صعب الحفاظ عليه يمنحني إحساساً بالرقي">جمال صعب الحفاظ عليه لكن يمنحني إحساساً بالرقي من يوم لآخر</option>
+              <option value="بساطة وتقنية سهلة الصيانة تدوم سنوات">بساطة وتقنية سهلة الصيانة تدوم سنوات دون تعب أو تكلفة إضافية</option>
+            </select>
+          </div>
         </div>
       </section>
 
-      <!-- STEP 7: الذوق والأسلوب التصميمي -->
+      <!-- STEP 7: البصرة الحسية للمكان (NEW) -->
       <section class="step-card" data-step="7">
         <div class="question-number">07</div>
+        <h2 class="question-text">البصرة الحسية للمكان</h2>
+        <p class="question-description">يكشف هذا القسم عن حواسك وقراراتك اللاإرادية تجاه المواد والإضاءة والفراغات.</p>
+        <div class="compact-grid">
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">كيف يؤثر الضوء الطبيعي على شعورك داخل المنزل؟</label>
+            <select class="compact-input" id="naturalLightImpact">
+              <option value="">اختر...</option>
+              <option value="الضوء الطبيعي ضروري طول اليوم">الضوء الطبيعي ضروري في طول اليوم - الغرف المعتمة تضيق صدري</option>
+              <option value="أفضل ضوءاً طبيعياً معتدلاً مع إمكانية التحكم">أفضل ضوءاً طبيعياً معتدلاً مع إمكانية التحكم فيه بالستائر</option>
+              <option value="أفضل التحكم الكامل بالإضاءة">أفضل التحكم الكامل بالإضاءة وأشعر بالراحة في الجو الخامت</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما الذي يلفت نظرك أول ما تدخل أي مكان؟</label>
+            <select class="compact-input" id="firstNoticedInSpace">
+              <option value="">اختر...</option>
+              <option value="الألوان وتناسقها مع بعضها">الألوان وتناسقها مع بعضها</option>
+              <option value="المواد والخامات - الخشب والحجر والأقمشة">المواد والخامات - الخشب والحجر والأقمشة</option>
+              <option value="التناسب والارتفاعات والتوازن البصري">التناسب والارتفاعات والتوازن البصري للفراغ</option>
+              <option value="الضوء وكيف يسقط ويتحرك على الأسطح">الضوء وكيف يسقط ويتحرك على الأسطح</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما الذي يزعجك فوراً عند أول دخولك أي مكان؟</label>
+            <select class="compact-input" id="annoyingAtEntrance">
+              <option value="">اختر...</option>
+              <option value="الفوضى البصرية لكثرة التفاصيل المتنافسة">الفوضى البصرية لكثرة التفاصيل المتنافسة</option>
+              <option value="البرود وغياب الدفء والمشاعر الإنسانية">البرود وغياب الدفء والمشاعر الإنسانية</option>
+              <option value="الإضاءة الصاخبة أو الساطعة جداً">الإضاءة الصاخبة أو الساطعة جداً</option>
+              <option value="الروائح الكيميائية وضعف التهوية">الروائح الكيميائية وضعف التهوية</option>
+              <option value="الأثاث الجامد والمقررات الضيقة التي تعيق الحرية">الأثاث الجامد والمقررات الضيقة التي تعيق الحرية</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">عند لمس الأثاث والموروشات، ما الذي يشعرك بالرضا والجودة؟</label>
+            <select class="compact-input" id="materialSatisfaction">
+              <option value="">اختر...</option>
+              <option value="ناعم وطري جداً - المخمل والكتان والأقمشة الثقيلة">ناعم وطري جداً - المخمل والكتان والأقمشة الثقيلة</option>
+              <option value="بارد وصلب بشكل راقٍ - الرخام والمعادن والزجاج">بارد وصلب بشكل راقٍ - الرخام والمعادن والزجاج</option>
+              <option value="دافئ وله روح - الخشب الطبيعي والحجر الخام والطين">دافئ وله روح - الخشب الطبيعي والحجر الخام والطين</option>
+              <option value="لا يهمني المواد بقدر ما يهمني الشكل والألوان">لا يهمني المواد بقدر ما يهمني الشكل والألوان</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 8: علم نفس المساحة (NEW) -->
+      <section class="step-card" data-step="8">
+        <div class="question-number">08</div>
+        <h2 class="question-text">علم نفس المساحة</h2>
+        <p class="question-description">يكشف هذا القسم عن كيف يعيش العميل داخل الفراغ - لكن ليس قرارات التوزيع قبل أي قرار تشطيب.</p>
+        <div class="compact-grid">
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">كيف تصف حاجتك للمساحة الحرة في حياتك؟</label>
+            <select class="compact-input" id="freeSpaceNeed">
+              <option value="">اختر...</option>
+              <option value="أحتاج فراغاً كبيراً حولي - الأماكن المنظمة تربكني">أحتاج فراغاً كبيراً حولي - الأماكن المنظمة تربكني ولا تريحني</option>
+              <option value="لا أهتم بالاتساع بقدر ما أهتم بالدفء والإحساس الحنوني">لا أهتم بالاتساع بقدر ما أهتم بالدفء والإحساس الحنوني</option>
+              <option value="أحب الاتساع في الفراغات العامة والخصوصية في فراغات النوم">أحب الاتساع في الفراغات العامة والخصوصية في فراغات النوم</option>
+              <option value="لا أفكر في ذلك - المهم أن كل شيء في متناول اليد">لا أفكر في ذلك - المهم أن كل شيء متناسل في متناول اليد</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما هو إحساسك الجمالي بارتفاع السقف؟</label>
+            <select class="compact-input" id="ceilingHeightFeel">
+              <option value="">اختر...</option>
+              <option value="سقف عالٍ يمنحني شعوراً بالحرية والرقي">سقف عالٍ يمنحني شعوراً بالحرية والرقي</option>
+              <option value="ارتفاع معتدل أكثر دفئاً وأريح للأسرة">ارتفاع معتدل - أكثر دفئاً وأريح للأسرة</option>
+              <option value="لا يهمني الارتفاع - أهتم بجودة تصميم السقف">لا يهمني الارتفاع - أهتم بجودة تصميم السقف فعلاً</option>
+              <option value="أفضل أسقفاً منخفضة في النوم وعالية في الصالة">أفضل أسقفاً منخفضة حنينية في غرف النوم وعالية في الصالة</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">كيف تنظر للعلاقة بين منزلك والعالم الخارجي؟</label>
+            <select class="compact-input" id="homeExteriorRelation">
+              <option value="">اختر...</option>
+              <option value="أريد تواصلاً بصرياً مستمراً مع الخارج">أريد تواصلاً بصرياً مستمراً مع الخارج - نوافذ كبيرة وشرفات مفتوحة</option>
+              <option value="الخصوصية أول - أفضل العزل الكامل">الخصوصية أول - أفضل العزل الكامل عن الجيران والشارع</option>
+              <option value="تواصل نظري وحنين - نوافذ عالية وزجاج يحفظ الخصوصية">تواصل نظري وحنين - نوافذ عالية أو زجاج يعالج ويحفظ الخصوصية</option>
+              <option value="يختلف من غرفة لأخرى">يختلف من غرفة لأخرى - الصالة أكثر انفتاحاً وغرف النوم غنية تماماً</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما هي زاويتك الجمالية في المنزل؟</label>
+            <select class="compact-input" id="aestheticCorner">
+              <option value="">اختر...</option>
+              <option value="كرسي فردي بجانب نافذة أو مصدر ضوء طبيعي">كرسي فردي بجانب نافذة أو مصدر ضوء طبيعي</option>
+              <option value="ركن أريكة علوي دائم في الصالة">ركن أريكة علوي دائم في الصالة</option>
+              <option value="طاولة الطعام - أشعر بالانتهاء حين أجلس قريباً من الطعام">طاولة الطعام - أشعر بالانتهاء حين أجلس قريباً من الطعام</option>
+              <option value="المطبخ - أشعر بالانتهاء حول أكل قريب من الطعام">المطبخ - أشعر بالانتهاء حين أكون قريباً من الطعام</option>
+              <option value="لا أجذب لزاوية بعينها - أتحرك بحرية في كل الفراغات">لا أجذب لزاوية بعينها - أتحرك بحرية في كل الفراغات</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 9: الهوية الثقافية للمنزل (NEW) -->
+      <section class="step-card" data-step="9">
+        <div class="question-number">09</div>
+        <h2 class="question-text">الهوية الثقافية للمنزل</h2>
+        <p class="question-description">هذا القسم غائب تماماً في الاستبيان الحالي وهو الأول من نوعه في السياق المصري والعربي.</p>
+        <div class="compact-grid">
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">كيف تعرّف وظيفة مجلس الاستقبال في منزلك؟</label>
+            <select class="compact-input" id="guestRoomFunction">
+              <option value="">اختر...</option>
+              <option value="هناك رسمي مخصص للضيوف فقط - لا تدخله الأسرة يومياً">هناك رسمي مخصص للضيوف فقط - لا تدخله الأسرة يومياً</option>
+              <option value="هناك تعدد الاستخدام - يستخدمونه يومياً ويستقبل الضيوف">هناك تعدد الاستخدام - يستخدمونه يومياً ويستقبل الضيوف أيضاً</option>
+              <option value="لا أهتم بتخصيص مجلس رسمي - الضيوف يجلسون مع الأسرة">لا أهتم بتخصيص مجلس رسمي - الضيوف يجلسون مع الأسرة</option>
+              <option value="أحتاج مجلسين للتفصيل - مجلس رجال ومجلس نساء أو الأسرة">أحتاج مجلسين للتفصيل: مجلس رجال ومجلس نساء أو الأسرة</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">هل تحتاج إلى مكان مخصص للصلاة داخل المنزل؟</label>
+            <select class="compact-input" id="prayerSpaceNeed">
+              <option value="">اختر...</option>
+              <option value="لا، أصلي في أي مكان">لا، أصلي في أي مكان</option>
+              <option value="نعم، أحتاج ركناً صغيراً للصلاة في غرفة النوم الرئيسية">نعم، أحتاج ركناً صغيراً للصلاة في غرفة النوم الرئيسية</option>
+              <option value="نعم، أحتاج غرفة صلاة مستقلة أو مصلى داخل المنزل">نعم، أحتاج غرفة صلاة مستقلة أو مصلى داخل المنزل</option>
+              <option value="أريد توجيه القبلة يؤخذ في الاعتبار عند تصميم الغرف">أريد توجيه القبلة يؤخذ في الاعتبار عند تصميم الغرف</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">كيف يستخدم أفراد الأسرة الفراغات العامة في المنزل؟</label>
+            <select class="compact-input" id="familyCommonAreaUse">
+              <option value="">اختر...</option>
+              <option value="الكل يجتمع في مكان واحد - يريد فراغاً وحيداً وللعائلة">الكل يجتمع في مكان واحد - يريد فراغاً وحيداً وللعائلة</option>
+              <option value="كل فرد يحتاج خصوصيته - يريد فراغات معيشة منفردة">كل فرد يحتاج خصوصيته - يريد فراغات معيشة منفردة عزولها</option>
+              <option value="الأطفال يضاعون والكبار يضاعون منفصل">الأطفال لهم فضاؤهم والكبار لهم فضاؤهم المنفصل</option>
+              <option value="يختلف حسب الوقت - النهار متاح والليل خاص">يختلف حسب الوقت - النهار الأسرة متاحة والليل خاص بكل فرد</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما طبيعة استضافتك للضيوف في الغالب؟</label>
+            <select class="compact-input" id="hostingNature">
+              <option value="">اختر...</option>
+              <option value="عزومات رسمية كبيرة في المناسبات والأعياد">عزومات رسمية كبيرة في المناسبات والأعياد</option>
+              <option value="زيارات أسرية متكررة وغير رسمية">زيارات أسرية متكررة وغير رسمية</option>
+              <option value="ضيوف أعمال وزملاء يستوجب الاستقبال الكامل">ضيوف أعمال وزملاء يستوجب الاستقبال الكامل</option>
+              <option value="نادراً ما أستضيف - المنزل مساحة خاصة للأسرة فقط">نادراً ما أستضيف - المنزل مساحة خاصة للأسرة فقط</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 10: الذوق والأسلوب التصميمي (was 7) -->
+      <section class="step-card" data-step="10">
+        <div class="question-number">10</div>
         <h2 class="question-text">الذوق والأسلوب التصميمي المفضّل</h2>
         <div class="compact-grid">
           <div class="compact-item">
@@ -398,12 +592,43 @@
               <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="خامات بديله">خامات بديله</span>
             </div>
           </div>
+          <!-- NEW questions -->
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">كيف تفضل وجود الديكورات والتحف داخل المنزل؟</label>
+            <select class="compact-input" id="decorPreference">
+              <option value="">اختر...</option>
+              <option value="أحب التحف والأعمال الفنية - جزء من هويتي وقصتي">أحب التحف والأعمال الفنية - جزء من هويتي وقصتي</option>
+              <option value="أفضل الحد الأدنى من الديكورات - الأقل دائماً أجمل">أفضل الحد الأدنى من الديكورات - الأقل دائماً أجمل وأرقى</option>
+              <option value="أفضل صور العائلة والمحطات الشخصية">أفضل صور العائلة والمحطات الشخصية على أي ديكور آخر</option>
+              <option value="أحب التفاصيل الدقيقة المدروسة بمستوى واضح بصرياً">أحب التفاصيل الدقيقة المدروسة ولكن في مستوى واضح بصرياً</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">أي من هذه الأوصاف أقرب لأثاثك المثالي؟</label>
+            <select class="compact-input" id="idealFurnitureDesc">
+              <option value="">اختر...</option>
+              <option value="قطعة توليفية فنية موحدة تعبر عن صاحبها">قطعة توليفية فنية موحدة تشكيلياً تعبر عن صاحبها</option>
+              <option value="أثاث يندمج في الفراغ بذكاء دون أن يطغى">أثاث يندمج في الفراغ بذكاء دون أن يطغى أو يسيطر</option>
+              <option value="أثاث يخدم وظيفته بامتياز والجمال في المرتبة الثانية">أثاث يخدم وظيفته بامتياز ثم يأتي جمالياً في المرتبة الثانية</option>
+              <option value="أثاث متعدد الاستخدامات يتحول مع احتياجات الأسرة">أثاث متعدد الاستخدامات ويتحول مع احتياجات الأسرة</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">كيف تتعامل مع الأنماط والتكرار البصري (Patterns) في التصميم؟</label>
+            <select class="compact-input" id="patternTolerance">
+              <option value="">اختر...</option>
+              <option value="أحب الأنماط المنتظمة الهندسية - تريحني بصرياً">أحب الأنماط المنتظمة الهندسية - تريحني بصرياً</option>
+              <option value="أفضل قطعة واحدة مميزة بنقط وباقي المساحة ظل">أفضل قطعة واحدة مميزة بنقط وباقي المساحة ظل</option>
+              <option value="لا أحب الأنماط - أفضل المساحات الظلية الخالية">لا أحب الأنماط - أفضل المساحات الظلية الخالية من التكرار</option>
+              <option value="أقبل الأنماط النباتية والعضوية الطبيعية فقط">أقبل الأنماط النباتية والعضوية الطبيعية فقط</option>
+            </select>
+          </div>
         </div>
       </section>
 
-      <!-- STEP 8: غرفة المعيشة -->
-      <section class="step-card" data-step="8">
-        <div class="question-number">08</div>
+      <!-- STEP 11: غرفة المعيشة (was 8) -->
+      <section class="step-card" data-step="11">
+        <div class="question-number">11</div>
         <h2 class="question-text">تفضيلات غرفة المعيشة (Living Room)</h2>
         <div class="compact-grid">
           <div class="compact-item">
@@ -447,12 +672,44 @@
             <label class="compact-label">متطلبات إضافية في غرفة المعيشة</label>
             <textarea class="compact-input" id="livingExtra" rows="2" placeholder="مثال: ركن للقهوة، مدفأة ديكورية، أرفف للكتب والنباتات"></textarea>
           </div>
+          <!-- NEW questions -->
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما الشعور الذي تريده حين تجلس في غرفة معيشتك؟</label>
+            <select class="compact-input" id="livingRoomFeel">
+              <option value="">اختر...</option>
+              <option value="الراحة والاسترخاء التام - كأنك في فندق فاخر">الراحة والاسترخاء التام وكأنك في فندق فاخر</option>
+              <option value="الدفء والحنينة - كأنك في حضن العائلة">الدفء والحنينة وكأنك في حضن العائلة</option>
+              <option value="الحيوية والنشاط - يشحن طاقتك">الحيوية والنشاط - يشحن طاقتك</option>
+              <option value="الهدوء والنظافة البصرية - هناك يفصل ذهنك">الهدوء والنظافة البصرية - هناك يفصل ذهنك</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما هو الوقت الأول الذي تفضله في غرفة المعيشة؟</label>
+            <select class="compact-input" id="livingRoomBestTime">
+              <option value="">اختر...</option>
+              <option value="الصباح الباكر بهدوء قبل طقوس الأسرة">الصباح الباكر بهدوء قبل طقوس الأسرة</option>
+              <option value="المساء مع الأسرة في جو دائم ومجتمع">المساء مع الأسرة في جو دائم ومجتمع</option>
+              <option value="الليل الهادئ بعد نوم الأطفال - وقت الزوجين">الليل الهادئ بعد نوم الأطفال - وقت الزوجين</option>
+              <option value="الاستقبال والضيافة - هذا هو وقتنا الرئيسي">الاستقبال والضيافة - هذا هو وقتنا الرئيسي</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما أكثر شيء يزعجك في غرفة المعيشة الآن؟</label>
+            <select class="compact-input" id="livingRoomPainPoint">
+              <option value="">اختر...</option>
+              <option value="ضيق المساحة والإحساس بالاكتظاظ">ضيق المساحة والإحساس بالاكتظاظ</option>
+              <option value="سوء الإضاءة وغياب الأجواء المناسبة">سوء الإضاءة وغياب الأجواء المناسبة</option>
+              <option value="الفوضى وصعوبة الترتيب والتنظيم">الفوضى وصعوبة الترتيب والتنظيم</option>
+              <option value="الغرفة لا تعكس شخصيتي وذوقي">الغرفة لا تعكس شخصيتي وذوقي</option>
+              <option value="مشكلة في التوزيع - الأثاث لا يستغل المساحة بشكل جيد">مشكلة في التوزيع - الأثاث لا يستغل المساحة بشكل جيد</option>
+            </select>
+          </div>
         </div>
       </section>
 
-      <!-- STEP 9: الريسبشن والسفرة -->
-      <section class="step-card" data-step="9">
-        <div class="question-number">09</div>
+      <!-- STEP 12: الريسبشن والسفرة (was 9) -->
+      <section class="step-card" data-step="12">
+        <div class="question-number">12</div>
         <h2 class="question-text">منطقة الاستقبال وتناول الطعام (Reception & Dining)</h2>
         <div class="compact-grid">
           <div class="compact-item">
@@ -462,6 +719,7 @@
               <option value="رسمي وفاخر كلاسيك">رسمي وفاخر كلاسيكي</option>
               <option value="نيو كلاسيك أنيق">نيو كلاسيك أنيق وعصري</option>
               <option value="عصري وبسيط جداً">عصري وبسيط جداً (Minimal)</option>
+              <option value="متعدد الاستخدامات - يتحول بين الرسمي والعادي">متعدد الاستخدامات - يتحول بين الرسمي والعادي</option>
             </select>
           </div>
           <div class="compact-item">
@@ -495,9 +753,9 @@
         </div>
       </section>
 
-      <!-- STEP 10: المطبخ -->
-      <section class="step-card" data-step="10">
-        <div class="question-number">10</div>
+      <!-- STEP 13: المطبخ (was 10) -->
+      <section class="step-card" data-step="13">
+        <div class="question-number">13</div>
         <h2 class="question-text">تفضيلات المطبخ (Kitchen)</h2>
         <div class="compact-grid">
           <div class="compact-item">
@@ -519,7 +777,7 @@
             </select>
           </div>
           <div class="compact-item" style="grid-column: span 2;">
-            <label class="compact-label">أهم العناصر المطلوبة في المطبخ (يمكن اختيار أكثر من خيار)</label>
+            <label class="compact-label">أهم العناصر المطلوبة في المطبخ</label>
             <textarea class="compact-input" id="kitchenNeeds" rows="2" placeholder="مثال: جزيرة في الوسط (Kitchen Island)، مخزن أغذية (Pantry)، أجهزة مدمجة (Built-in)، ركن للقهوة"></textarea>
           </div>
           <div class="compact-item" style="grid-column: span 2;">
@@ -538,12 +796,33 @@
               <span class="choice-key" style="cursor:pointer; padding: 6px 12px; font-size: 0.9rem;" data-val="كوفي كورنور">كوفي كورنور</span>
             </div>
           </div>
+          <!-- NEW questions -->
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">كيف تصل عائلتك بالمطبخ؟</label>
+            <select class="compact-input" id="kitchenFamilyRelation">
+              <option value="">اختر...</option>
+              <option value="المطبخ متعة وإبداع - أريد مطبخاً يشجعني ويشجعهم">المطبخ متعة وإبداع - أريد مطبخاً يشجعني ويشجعهم</option>
+              <option value="المطبخ واجب وظيفي - أريد مطبخاً فعالاً سريع التنظيف">المطبخ واجب وظيفي - أريد مطبخاً فعالاً سريع التنظيف</option>
+              <option value="المطبخ نادر - أريد مطبخاً جميلاً بصرياً أكثر من كونه وظيفياً">المطبخ نادر - أريد مطبخاً جميلاً بصرياً أكثر من كونه وظيفياً</option>
+              <option value="المطبخ مكان اجتماعي أيضاً - الأسرة تجتمع حوله">المطبخ مكان اجتماعي أيضاً - الأسرة تجتمع حوله</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما الوجبة الأولى التي تجمع أسرتك في المنزل؟</label>
+            <select class="compact-input" id="familyMealGathering">
+              <option value="">اختر...</option>
+              <option value="الإفطار الباكر - الأسرة تجتمع في صباح">الإفطار الباكر - الأسرة تجتمع في صباح</option>
+              <option value="الغداء - وجبة الأسرة الرئيسية">الغداء - وجبة الأسرة الرئيسية</option>
+              <option value="العشاء - هو الوقت الحقيقي للاجتماع والحديث">العشاء - هو الوقت الحقيقي للاجتماع والحديث</option>
+              <option value="لا تجتمع الأسرة على وجبة منتظمة - كل فرد في وقته">لا تجتمع الأسرة على وجبة منتظمة - كل فرد في وقته</option>
+            </select>
+          </div>
         </div>
       </section>
 
-      <!-- STEP 11: غرفة النوم الرئيسية -->
-      <section class="step-card" data-step="11">
-        <div class="question-number">11</div>
+      <!-- STEP 14: غرفة النوم الرئيسية (was 11) -->
+      <section class="step-card" data-step="14">
+        <div class="question-number">14</div>
         <h2 class="question-text">غرفة النوم الرئيسية (Master Bedroom)</h2>
         <div class="compact-grid">
           <div class="compact-item">
@@ -576,12 +855,138 @@
             <label class="compact-label">متطلبات إضافية لغرفة الماستر</label>
             <textarea class="compact-input" id="masterNeeds" rows="2" placeholder="مثال: غرفة ملابس مستقلة (Walk-in Closet)، ركن للقراءة، تسريحة مكياج مميزة، شاشة تلفاز معلقة"></textarea>
           </div>
+          <!-- NEW questions -->
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما الشعور الذي تريد أن تستيقظ عليه في الصباح؟</label>
+            <select class="compact-input" id="morningWakeupFeel">
+              <option value="">اختر...</option>
+              <option value="التجدد والنشاط - ألوان محايدة وضوء طبيعي يبدأ معك اليوم">التجدد والنشاط - ألوان محايدة وضوء طبيعي يبدأ معك اليوم</option>
+              <option value="هادئ للتأمل - أجواء داكنة دائمة وإضاءة خافتة جانبية">هادئ للتأمل - أجواء داكنة دائمة وإضاءة خافتة جانبية</option>
+              <option value="بسيط جداً وخالي من المشتتات - الغرفة للنوم فقط">بسيط جداً وخالي من المشتتات - الغرفة للنوم فقط</option>
+              <option value="أشعر بالانتهاء مبكراً بعناصر بصرية مختارة">أشعر بالانتهاء مبكراً بعناصر بصرية مختارة تعكس يومي</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما الوقت الأول الذي تفضله في غرفة النوم بخلاف الليل؟</label>
+            <select class="compact-input" id="masterBedroomBestTime">
+              <option value="">اختر...</option>
+              <option value="القراءة والاسترخاء قبل النوم">القراءة والاسترخاء قبل النوم</option>
+              <option value="العمل في المنزل من هذه الغرفة أحياناً">العمل في المنزل من هذه الغرفة أحياناً</option>
+              <option value="الجلوس والحديث مع الشريك - ركن جلوس صغير">الجلوس والحديث مع الشريك (ركن جلوس صغير)</option>
+              <option value="الغرفة للنوم فقط - لا أمضي وقتاً طويلاً مستيقظاً فيها">الغرفة للنوم فقط - لا أمضي وقتاً طويلاً مستيقظاً فيها</option>
+            </select>
+          </div>
         </div>
       </section>
 
-      <!-- STEP 12: غرف ومساحات إضافية -->
-      <section class="step-card" data-step="12">
-        <div class="question-number">12</div>
+      <!-- STEP 15: الحمامات (NEW) -->
+      <section class="step-card" data-step="15">
+        <div class="question-number">15</div>
+        <h2 class="question-text">الحمامات</h2>
+        <p class="question-description">تفضيلات الحمام الرئيسي (En-suite Master Bathroom) والحمامات الأخرى.</p>
+        <div class="compact-grid">
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">ما الطابع العام الذي تريده لحمامك الرئيسي؟</label>
+            <select class="compact-input" id="masterBathVibe">
+              <option value="">اختر...</option>
+              <option value="سبا فاخر وهادئ - تجربة استرخاء كاملة">سبا فاخر وهادئ - تجربة استرخاء كاملة</option>
+              <option value="فندقي أنيق - يظل كل شيء في مكانه دون مبالغة">فندقي أنيق - يظل كل شيء في مكانه دون مبالغة</option>
+              <option value="عملي للإعلان - من شيء في متناول اليد بسهولة">عملي للإعلان - كل شيء في متناول اليد بسهولة</option>
+              <option value="دافئ وطبيعي - خامات خشبية وحجرية وألوان ترابية">دافئ وطبيعي - خامات خشبية وحجرية وألوان ترابية</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">هل تريد حوض استحمام (Bathtub) في الحمام الرئيسي؟</label>
+            <select class="compact-input" id="wantsBathtub">
+              <option value="">اختر...</option>
+              <option value="لا، أفضل الدش فقط لتوسيع المساحة">لا، أفضل الدش فقط لتوسيع المساحة</option>
+              <option value="نعم، حوض مستقل قائم بذاته (Freestanding)">نعم، حوض مستقل قائم بذاته (Freestanding)</option>
+              <option value="نعم، حوض مدمج في الموصة (Built-in)">نعم، حوض مدمج في الموصة (Built-in)</option>
+              <option value="نعم، حوض استحمام بفوارات مائية (Jacuzzi)">نعم، حوض استحمام بفوارات مائية (Jacuzzi)</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">نوع الدش المفضل</label>
+            <select class="compact-input" id="showerType">
+              <option value="">اختر...</option>
+              <option value="دش عادي بضغط مريح">دش عادي بضغط مريح</option>
+              <option value="دش مطر علوي (Rain Shower) فقط">دش مطر علوي (Rain Shower) فقط</option>
+              <option value="دش مطر علوي مع دش يدوي">دش مطر علوي مع دش يدوي</option>
+              <option value="كبينة دش مغلقة بالكامل (Shower Cabin)">كبينة دش مغلقة بالكامل (Shower Cabin)</option>
+              <option value="دش مفتوح بلا حاجز (Walk-in Shower)">دش مفتوح بلا حاجز (Walk-in Shower)</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">نوع الواجهة والمغسلة (Vanity)</label>
+            <select class="compact-input" id="vanityType">
+              <option value="">اختر...</option>
+              <option value="وحدة مغسلة واحدة مع تخزين أسفلها">وحدة مغسلة واحدة مع تخزين أسفلها</option>
+              <option value="وحدة مغسلتين للزوجين مع تخزين مشترك">وحدة مغسلتين (للزوجين) مع تخزين مشترك</option>
+              <option value="مغسلة معلقة بلا وحدة تخزين (Floating Basin) - مظهر عصري">مغسلة معلقة بلا وحدة تخزين (Floating Basin) - مظهر عصري</option>
+              <option value="مغسلة كلاسيكية على رجل (Pedestal) أو كاونتر رخام">مغسلة كلاسيكية على رجل (Pedestal) أو كاونتر رخام</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">التخزين في الحمام الرئيسي</label>
+            <select class="compact-input" id="bathroomStorage">
+              <option value="">اختر...</option>
+              <option value="خزانة دواء خفية خلف المرآة">خزانة دواء خفية خلف المرآة</option>
+              <option value="وحدة تخزين علوية مسلوبة حول الواجهة">وحدة تخزين علوية مسلوبة حول الواجهة</option>
+              <option value="تخزين في الحوائط (Niches) داخل الدش وبجوار الحوض">تخزين في الحوائط (Niches) داخل الدش وبجوار الحوض</option>
+              <option value="أريد تخزين وافر - أنا أضع أغراضاً كثيرة في الحمام">أريد تخزين وافر - أنا أضع أغراضاً كثيرة في الحمام</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">مواد التشطيب المفضلة للحمام الرئيسي</label>
+            <select class="compact-input" id="bathroomFlooring">
+              <option value="">اختر...</option>
+              <option value="رخام طبيعي">رخام طبيعي</option>
+              <option value="بورسلين حجري أو خشبي (Wood-look / Stone-look)">بورسلين حجري أو خشبي (Wood-look / Stone-look)</option>
+              <option value="تراكوتا أو بلاط مغربي وأنماط تقليدية">تراكوتا أو بلاط مغربي وأنماط تقليدية</option>
+              <option value="خامات سادة هادئة بدون نقط">خامات سادة هادئة بدون نقط</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">الإضاءة في الحمام الرئيسي</label>
+            <select class="compact-input" id="bathroomLighting">
+              <option value="">اختر...</option>
+              <option value="إضاءة دافئة خافتة لجو السبا والاسترخاء">إضاءة دافئة خافتة لجو السبا والاسترخاء</option>
+              <option value="إضاءة بيضاء ساطعة واضحة للتجهيز والوظيفية">إضاءة بيضاء ساطعة واضحة للتجهيز والإضاءة الوظيفية</option>
+              <option value="إضاءة مزدوجة - دافئة للجو وبيضاء حول المرآة">إضاءة مزدوجة - دافئة للجو وبيضاء حول المرآة للتجهيز</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">هل تحتاج حمام ضيوف مستقل (Guest Bathroom) ليفصل عن حمامات الغرف؟</label>
+            <select class="compact-input" id="guestBathroom" onchange="toggleGuestBathroomVibe(this.value)">
+              <option value="">اختر...</option>
+              <option value="لا، أحد حمامات الغرف يخدم الضيوف">لا، أحد حمامات الغرف يخدم الضيوف</option>
+              <option value="نعم، أريد حماماً خاصاً للضيوف بجوار الصالة أو الاستقبال">نعم، أريد حماماً خاصاً للضيوف بجوار الصالة أو الاستقبال</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;" id="guestBathroomVibeWrapper" style="display:none;">
+            <label class="compact-label">طابع حمام الضيوف المطلوب</label>
+            <select class="compact-input" id="guestBathroomVibe">
+              <option value="">اختر...</option>
+              <option value="واجهة وطباع أول مبنى - يعكس مستوى المنزل">واجهة وطباع أول مبنى - أريده يعكس مستوى المنزل</option>
+              <option value="أنيق ومعقول - يظهر جميل دون مبالغة">أنيق ومعقول - يظهر جميل دون مبالغة</option>
+              <option value="صغير ومختصر - المساحة محدودة وأريد الاستفادة منها">صغير ومختصر - المساحة محدودة وأريد الاستفادة منها فقط</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">هل تحتاج حمامات مشتركة بين غرف الأطفال أو الغرف الإضافية؟</label>
+            <select class="compact-input" id="sharedBathrooms">
+              <option value="">اختر...</option>
+              <option value="لا، كل غرفة لها حمامها الخاص">لا، كل غرفة لها حمامها الخاص</option>
+              <option value="نعم، حمام مشترك بين غرفتين">نعم، حمام مشترك بين غرفتين</option>
+              <option value="نعم، حمام واحد مشترك لجميع الغرف الإضافية">نعم، حمام واحد مشترك لجميع الغرف الإضافية</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 16: غرف ومساحات إضافية (was 12) -->
+      <section class="step-card" data-step="16">
+        <div class="question-number">16</div>
         <h2 class="question-text">مساحات وغرف إضافية بالمنزل</h2>
         <p class="question-description">يرجى تحديد متطلباتك للمساحات الخدمية والترفيهية الإضافية.</p>
         <div class="compact-grid">
@@ -628,9 +1033,9 @@
         </div>
       </section>
 
-      <!-- STEP 13: الأسئلة النهائية والتطلعات -->
-      <section class="step-card" data-step="13">
-        <div class="question-number">13</div>
+      <!-- STEP 17: الأسئلة النهائية والتطلعات (was 13) -->
+      <section class="step-card" data-step="17">
+        <div class="question-number">17</div>
         <h2 class="question-text">الأسئلة النهائية والتطلعات الفنية</h2>
         <div class="compact-grid">
           <div class="compact-item">
@@ -667,17 +1072,38 @@
               <option value="نعم">نعم، لدي صور وسأشاركها معكم لاحقاً</option>
             </select>
           </div>
+          <!-- NEW questions -->
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">إذا كان منزلك شخصاً، من يكون؟</label>
+            <select class="compact-input" id="homePersonaType">
+              <option value="">اختر...</option>
+              <option value="شخص هادئ ورزين يشعرك بالأمان حين تدخل">شخص هادئ ورزين ويشعرك بالأمان حين تدخل</option>
+              <option value="شخص أنيق ومتحضر يستحق الإعجاب والتقدير">شخص أنيق ومتحضر يستحق الإعجاب والتقدير</option>
+              <option value="شخص دافئ ومضيء يجعلك تريد البقاء أطول وقت">شخص دافئ ومضيء يجعلك تريد البقاء أطول وقت معه</option>
+              <option value="شخص مبدع وغير تقليدي يفاجئك دائماً بتفصيلة متنوعة">شخص مبدع وغير تقليدي ويفاجئك دائماً بتفصيلة من تتنوعها</option>
+            </select>
+          </div>
+          <div class="compact-item" style="grid-column: span 2;">
+            <label class="compact-label">هل يختلف أحد أفراد الأسرة معك في القرارات التصميمية؟</label>
+            <select class="compact-input" id="familyDesignConflict">
+              <option value="">اختر...</option>
+              <option value="لا، الأسرة كتلة واحدة تماماً">لا، الأسرة كتلة واحدة تماماً</option>
+              <option value="اختلافات بسيطة نتفق عليها بسهولة">اختلافات بسيطة نتفق عليها بسهولة</option>
+              <option value="الزوجة أو الزوج لها تفضيلات مختلفة تحتاج أخذها في الاعتبار">الزوجة/الزوج لها/له تفضيلات مختلفة تحتاج أخذها في الاعتبار</option>
+              <option value="الأطفال الكبار لهم آراء قد تؤثر على بعض القرارات">الأطفال الكبار لهم آراء قد تؤثر على بعض القرارات</option>
+              <option value="الخيال كبير - يحتاج حلولاً توفيقية في عدة فراغات">الخيال كبير - يحتاج حلولاً توفيقية في عدة فراغات</option>
+            </select>
+          </div>
         </div>
       </section>
 
-      <!-- STEP 14: Submitting Spinner & Thank You Screen -->
-      <section class="step-card" data-step="14">
+      <!-- STEP 18: Submitting Spinner & Thank You Screen (was 14) -->
+      <section class="step-card" data-step="18">
         <div class="spinner-container" id="submitLoading">
           <div class="spinner"></div>
           <h2 class="question-text" style="text-align: center; margin: 0;">جاري إرسال تفضيلاتك وحفظ طلبك...</h2>
           <p class="question-description" style="text-align: center;">يرجى الانتظار لحين الانتهاء.</p>
         </div>
-
         <div id="submitSuccess" style="display: none; text-align: center;">
           <div class="welcome-logo" style="color: var(--success-color);">
             <i class="fa-solid fa-circle-check"></i>
@@ -698,6 +1124,14 @@
     </div>
   </div>
 
+  <script>
+    function toggleGuestBathroomVibe(val) {
+      const wrapper = document.getElementById('guestBathroomVibeWrapper');
+      if (wrapper) {
+        wrapper.style.display = val && val.startsWith('نعم') ? 'block' : 'none';
+      }
+    }
+  </script>
   <script src="js/form.js"></script>
 </body>
 </html>
